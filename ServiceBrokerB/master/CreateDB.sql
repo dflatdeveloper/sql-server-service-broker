@@ -1,4 +1,3 @@
-/*
 USE [master]
 GO
 
@@ -115,4 +114,3 @@ GO
 
 ALTER DATABASE [ServiceBrokerB] SET  READ_WRITE 
 GO
-*/

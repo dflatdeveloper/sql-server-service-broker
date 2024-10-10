@@ -8,8 +8,18 @@ EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "ServiceBrokerB", "ServiceBrokerB\ServiceBrokerB.sqlproj", "{900CEB38-4C85-4B0A-BF4E-4F9AD46DBCF4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A49EFCB8-62A4-4493-8A06-5442F379DD85}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Key Repository", "Key Repository", "{27F0DE3C-699D-4C81-BCF5-BCE7D132DFBC}"
 	ProjectSection(SolutionItems) = preProject
-		ExampleKeyRepository.sql = ExampleKeyRepository.sql
+		Key Repository\Backup Certificates.sql = Key Repository\Backup Certificates.sql
+		Key Repository\Create Certificates.sql = Key Repository\Create Certificates.sql
+		Key Repository\Create DB.sql = Key Repository\Create DB.sql
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Certificates", "Certificates", "{62B7CA98-5DB6-45B3-9FCC-13DDD3A43274}"
+	ProjectSection(SolutionItems) = preProject
+		Certificates\TRANSPORT_CERT_MACHINEB.cer = Certificates\TRANSPORT_CERT_MACHINEB.cer
+		Certificates\TRANSPORT_CERT_MACHINEB.pfx = Certificates\TRANSPORT_CERT_MACHINEB.pfx
 	EndProjectSection
 EndProject
 Global
@@ -33,6 +43,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{27F0DE3C-699D-4C81-BCF5-BCE7D132DFBC} = {A49EFCB8-62A4-4493-8A06-5442F379DD85}
+		{62B7CA98-5DB6-45B3-9FCC-13DDD3A43274} = {A49EFCB8-62A4-4493-8A06-5442F379DD85}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A3E07C08-9DB3-4BD2-AD97-CB1DB94855F2}
