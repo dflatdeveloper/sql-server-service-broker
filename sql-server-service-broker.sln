@@ -18,8 +18,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Key Repository", "Key Repos
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Certificates", "Certificates", "{62B7CA98-5DB6-45B3-9FCC-13DDD3A43274}"
 	ProjectSection(SolutionItems) = preProject
-		Certificates\TRANSPORT_CERT_MACHINEB.cer = Certificates\TRANSPORT_CERT_MACHINEB.cer
-		Certificates\TRANSPORT_CERT_MACHINEB.pfx = Certificates\TRANSPORT_CERT_MACHINEB.pfx
+		Certificates\DIALOG_CERT_SERVICEBROKERA.cer = Certificates\DIALOG_CERT_SERVICEBROKERA.cer
+		Certificates\DIALOG_CERT_SERVICEBROKERA.pfx = Certificates\DIALOG_CERT_SERVICEBROKERA.pfx
+		Certificates\DIALOG_CERT_SERVICEBROKERB.cer = Certificates\DIALOG_CERT_SERVICEBROKERB.cer
+		Certificates\DIALOG_CERT_SERVICEBROKERB.pfx = Certificates\DIALOG_CERT_SERVICEBROKERB.pfx
+		Certificates\DIALOG_CERT_SERVICEBROKERC.cer = Certificates\DIALOG_CERT_SERVICEBROKERC.cer
+		Certificates\DIALOG_CERT_SERVICEBROKERC.pfx = Certificates\DIALOG_CERT_SERVICEBROKERC.pfx
+		Certificates\TRANSPORT_CERT_MACHINE.cer = Certificates\TRANSPORT_CERT_MACHINE.cer
+		Certificates\TRANSPORT_CERT_MACHINE.pfx = Certificates\TRANSPORT_CERT_MACHINE.pfx
 	EndProjectSection
 EndProject
 Global

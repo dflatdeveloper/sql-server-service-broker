@@ -58,6 +58,15 @@
     <Folder Include="Properties" />
     <Folder Include="master" />
     <Folder Include="user" />
+    <Folder Include="Objects" />
+    <Folder Include="Objects\Message Types" />
+    <Folder Include="Objects\Contracts" />
+    <Folder Include="Objects\Remote Service Binding" />
+    <Folder Include="Objects\Services" />
+    <Folder Include="Objects\Queues" />
+    <Folder Include="Objects\Routes" />
+    <Folder Include="Objects\Stored Procs" />
+    <Folder Include="Objects\Tables" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Script.PostDeployment1.sql" />
@@ -66,9 +75,28 @@
     <PreDeploy Include="Script.PreDeployment1.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="master\CreateDB.sql" />
+    <None Include="master\Create DB.sql" />
+    <None Include="Objects\Stored Procs\SendQueueMessage.sql" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="user\ServerBrokerALogin.sql" />
+    <None Include="master\Create Certificates.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="master\Create Endpoint.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="master\Create Master Key.sql" />
+    <Build Include="user\Create Certificates.sql" />
+    <Build Include="user\Create Master Key.sql" />
+    <None Include="Objects\Remote Service Binding\Create RSB.sql" />
+    <Build Include="Objects\Queues\QueueA.sql" />
+    <Build Include="Objects\Contracts\SBMessageContract.sql" />
+    <Build Include="Objects\Message Types\Create Sender.sql" />
+    <Build Include="Objects\Message Types\Create Receiver.sql" />
+    <Build Include="Objects\Routes\RouteB.sql" />
+    <None Include="Objects\Routes\RouteC.sql" />
+    <Build Include="Objects\Services\ServiceA.sql" />
+    <Build Include="Objects\Stored Procs\QueueAActivationSProc.sql" />
+    <Build Include="Objects\Tables\SOMEVALUE.sql" />
   </ItemGroup>
 </Project>

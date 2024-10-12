@@ -1,0 +1,48 @@
+USE ServiceBrokerA
+
+--Private Key
+CREATE CERTIFICATE DIALOG_CERT_SERVICEBROKERA
+    AUTHORIZATION [dbo]
+    FROM FILE  = 'C:\Users\dbms-\source\repos\sql-server-service-broker\Certificates\DIALOG_CERT_SERVICEBROKERA.cer'
+    WITH PRIVATE KEY (FILE = 'C:\Users\dbms-\source\repos\sql-server-service-broker\Certificates\DIALOG_CERT_SERVICEBROKERA.pfx',
+        DECRYPTION BY PASSWORD = 'Password123!@#'
+    );
+GO
+
+--Public Key Only
+
+CREATE USER [User_SERVICEBROKERB]
+WITHOUT LOGIN
+GO
+
+CREATE CERTIFICATE DIALOG_CERT_SERVICEBROKERB
+    AUTHORIZATION [User_SERVICEBROKERB]
+    FROM FILE  = 'C:\Users\dbms-\source\repos\sql-server-service-broker\Certificates\DIALOG_CERT_SERVICEBROKERB.cer'
+GO
+
+GRANT CONNECT TO [User_SERVICEBROKERB]
+
+GO
+
+GRANT SEND ON SERVICE::ServiceA
+    TO USER_SERVICEBROKERB
+GO
+
+
+
+CREATE USER [User_SERVICEBROKERC]
+WITHOUT LOGIN
+GO
+
+CREATE CERTIFICATE DIALOG_CERT_SERVICEBROKERC
+    AUTHORIZATION [User_SERVICEBROKERC]
+    FROM FILE  = 'C:\Users\dbms-\source\repos\sql-server-service-broker\Certificates\DIALOG_CERT_SERVICEBROKERC.cer'
+GO
+
+GRANT CONNECT TO [User_SERVICEBROKERC]
+
+GO
+
+GRANT SEND ON SERVICE::ServiceA
+    TO USER_SERVICEBROKERC
+GO

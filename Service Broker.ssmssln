@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# SQL Server Management Studio Solution File, Format Version 20.00
+VisualStudioVersion = 15.0.28307.421
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{4F2E2C19-372F-40D8-9FA7-9D2138C6997A}") = "ServiceBrokerA", "ServiceBrokerA\ServiceBrokerA.ssmssqlproj", "{A6F0851A-6ED1-40FF-A43B-EC0A3B9AC1B3}"
+EndProject
+Project("{4F2E2C19-372F-40D8-9FA7-9D2138C6997A}") = "ServiceBrokerB", "ServiceBrokerB\ServiceBrokerB.ssmssqlproj", "{959F7927-924E-4851-ADFB-FF222ED59192}"
+EndProject
+Project("{4F2E2C19-372F-40D8-9FA7-9D2138C6997A}") = "KeyRepository", "Key Repository\KeyRepository\KeyRepository.ssmssqlproj", "{A3F414CF-121E-4C2C-AB74-ED73DA47D2E2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Default|Default = Default|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A6F0851A-6ED1-40FF-A43B-EC0A3B9AC1B3}.Default|Default.ActiveCfg = Default
+		{959F7927-924E-4851-ADFB-FF222ED59192}.Default|Default.ActiveCfg = Default
+		{A3F414CF-121E-4C2C-AB74-ED73DA47D2E2}.Default|Default.ActiveCfg = Default
+		{A943A2FB-591A-407F-AC70-A124F7DA679D}.Default|Default.ActiveCfg = Default
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9508FE5A-6938-45C2-93D4-1A3BF7F0CDD4}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,8 @@
+﻿USE ServiceBrokerA
+
+CREATE QUEUE [dbo].[QueueA]
+WITH STATUS = ON,
+ACTIVATION (STATUS = ON, 
+			PROCEDURE_NAME = [dbo].[QueueAActivationSProc],
+			EXECUTE AS SELF,
+			MAX_QUEUE_READERS = 10);
