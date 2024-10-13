@@ -87,14 +87,16 @@
     <Build Include="Objects\Stored Procs\QueueBActivationSProc.sql" />
     <Build Include="Objects\Tables\SOMEVALUE.sql" />
     <Build Include="Objects\Stored Procs\SendQueueMessage.sql" />
+    <Build Include="Objects\Contracts\SBMessageContract.sql" />
+    <Build Include="Objects\Message Types\Create Receiver.sql" />
+    <Build Include="Objects\Message Types\Create Sender.sql" />
+    <Build Include="Objects\Queues\QueueB_In.sql" />
+    <None Include="Objects\Remote Service Binding\ServiceB_Out.sql" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="Objects\Message Types\Create Sender.sql" />
-    <Build Include="Objects\Message Types\Create Receiver.sql" />
-    <Build Include="Objects\Contracts\SBMessageContract.sql" />
-    <Build Include="Objects\Queues\QueueB.sql" />
+    <Build Include="Objects\Queues\QueueB_Out.sql" />
     <Build Include="Objects\Services\ServiceB.sql" />
     <Build Include="user\Create Master Key.sql" />
-    <None Include="Objects\Remote Service Binding\ServiceB.sql" />
+    <None Include="Objects\Remote Service Binding\ServiceB_In.sql" />
   </ItemGroup>
 </Project>

@@ -67,6 +67,7 @@
     <Folder Include="Objects\Routes" />
     <Folder Include="Objects\Stored Procs" />
     <Folder Include="Objects\Tables" />
+    <Folder Include="Objects\Schema Collection" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Script.PostDeployment1.sql" />
@@ -88,15 +89,20 @@
     <Build Include="master\Create Master Key.sql" />
     <Build Include="user\Create Certificates.sql" />
     <Build Include="user\Create Master Key.sql" />
-    <None Include="Objects\Remote Service Binding\Create RSB.sql" />
-    <Build Include="Objects\Queues\QueueA.sql" />
+    <Build Include="Objects\Queues\QueueA_In.sql" />
     <Build Include="Objects\Contracts\SBMessageContract.sql" />
     <Build Include="Objects\Message Types\Create Sender.sql" />
     <Build Include="Objects\Message Types\Create Receiver.sql" />
     <Build Include="Objects\Routes\RouteB.sql" />
     <None Include="Objects\Routes\RouteC.sql" />
-    <Build Include="Objects\Services\ServiceA.sql" />
-    <Build Include="Objects\Stored Procs\QueueAActivationSProc.sql" />
+    <Build Include="Objects\Services\ServiceA_In.sql" />
+    <Build Include="Objects\Stored Procs\QueueA_InActivationSProc.sql" />
     <Build Include="Objects\Tables\SOMEVALUE.sql" />
+    <Build Include="Objects\Schema Collection\ValidatedData.sql" />
+    <Build Include="Objects\Queues\QueueA_Out.sql" />
+    <Build Include="Objects\Services\ServiceA_Out.sql" />
+    <Build Include="Objects\Stored Procs\QueueA_OutActivationSProc.sql" />
+    <None Include="Objects\Remote Service Binding\ServiceA_In.sql" />
+    <None Include="Objects\Remote Service Binding\ServiceA_Out.sql" />
   </ItemGroup>
 </Project>

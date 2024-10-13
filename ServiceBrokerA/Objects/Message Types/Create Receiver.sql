@@ -1,4 +1,17 @@
 ﻿USE ServiceBrokerA
+GO
 
 CREATE MESSAGE TYPE [ReceiverMessageType]
 	VALIDATION = NONE
+GO
+
+CREATE MESSAGE TYPE [ValidatedReceiverMessageType]
+	VALIDATION = VALID_XML WITH SCHEMA COLLECTION [ValidatedData]
+GO
+
+CREATE MESSAGE TYPE [WellFormedXMLReceiverMessageType]
+	VALIDATION = WELL_FORMED_XML
+GO
+
+CREATE MESSAGE TYPE [EmptyReceiverMessageType]
+	VALIDATION = EMPTY

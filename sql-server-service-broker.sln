@@ -8,6 +8,9 @@ EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "ServiceBrokerB", "ServiceBrokerB\ServiceBrokerB.sqlproj", "{900CEB38-4C85-4B0A-BF4E-4F9AD46DBCF4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A49EFCB8-62A4-4493-8A06-5442F379DD85}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Key Repository", "Key Repository", "{27F0DE3C-699D-4C81-BCF5-BCE7D132DFBC}"
 	ProjectSection(SolutionItems) = preProject
