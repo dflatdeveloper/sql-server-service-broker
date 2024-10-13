@@ -1,24 +1,13 @@
-﻿USE ServiceBrokerB
-GO
-
-CREATE TYPE QUEUEB_RESULTS_TT
-AS TABLE
-(
-    Msg NVARCHAR(MAX)
-)
-GO
-
-
-CREATE OR ALTER PROCEDURE [dbo].[QueueB_OutActivationSProc]
+﻿CREATE PROCEDURE [dbo].[QueueA_InActivationSProc]
 AS
 	
-    DECLARE @QueueB [dbo].[QUEUEB_RESULTS_TT];
+    DECLARE @QueueA [dbo].[QUEUEA_RESULTS_TT];
        
-	RECEIVE message_body FROM dbo.QueueB_In 
-    INTO @QueueB
+	RECEIVE message_body FROM dbo.QueueA_In 
+    INTO @QueueA
 
 
-    select * from @QueueB
+    select * from @QueueA
    
 	
 

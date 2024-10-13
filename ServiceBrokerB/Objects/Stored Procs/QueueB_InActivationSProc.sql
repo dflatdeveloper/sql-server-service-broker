@@ -1,15 +1,4 @@
-﻿USE ServiceBrokerB
-GO
-
-CREATE TYPE QUEUEB_RESULTS_TT
-AS TABLE
-(
-    Msg NVARCHAR(MAX)
-)
-GO
-
-
-CREATE OR ALTER PROCEDURE [dbo].[QueueB_InActivationSProc]
+﻿CREATE PROCEDURE [dbo].[QueueB_InActivationSProc]
 AS
 	
     DECLARE @QueueB  QUEUEB_RESULTS_TT;

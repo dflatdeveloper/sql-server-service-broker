@@ -1,6 +1,4 @@
-﻿USE ServiceBrokerB
-
-CREATE QUEUE [dbo].[QueueB_Out]
+﻿CREATE QUEUE [dbo].[QueueB_Out]
 WITH STATUS = ON,
 ACTIVATION (STATUS = ON, 
 			PROCEDURE_NAME = [dbo].[QueueB_OutActivationSProc],

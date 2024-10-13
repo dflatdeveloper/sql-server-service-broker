@@ -1,7 +1,4 @@
-﻿USE ServiceBrokerA
-GO
-
-CREATE MESSAGE TYPE [ReceiverMessageType]
+﻿CREATE MESSAGE TYPE [ReceiverMessageType]
 	VALIDATION = NONE
 GO
 
@@ -15,3 +12,4 @@ GO
 
 CREATE MESSAGE TYPE [EmptyReceiverMessageType]
 	VALIDATION = EMPTY
+GO

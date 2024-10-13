@@ -1,6 +1,4 @@
-﻿USE ServiceBrokerB
-
-CREATE ROUTE [RouteC]
+﻿CREATE ROUTE [RouteC]
 	AUTHORIZATION [User_SERVICEBROKERC]
 	WITH
 		SERVICE_NAME = '[ServiceC_In]',

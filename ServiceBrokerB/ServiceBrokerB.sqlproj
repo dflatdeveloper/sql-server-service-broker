@@ -68,9 +68,7 @@
     <Folder Include="Objects\Stored Procs" />
     <Folder Include="Objects\Tables" />
     <Folder Include="Objects\Schema Collection" />
-  </ItemGroup>
-  <ItemGroup>
-    <PostDeploy Include="Script.PostDeployment1.sql" />
+    <Folder Include="Objects\Table Types" />
   </ItemGroup>
   <ItemGroup>
     <PreDeploy Include="Script.PreDeployment1.sql" />
@@ -84,7 +82,7 @@
   <ItemGroup>
     <Build Include="user\Create Certificates.sql" />
     <None Include="master\Create Master Key.sql" />
-    <Build Include="Objects\Routes\RouteA.sql" />
+    <None Include="Objects\Routes\RouteA.sql" />
     <Build Include="Objects\Stored Procs\QueueB_OutActivationSProc.sql" />
     <Build Include="Objects\Tables\SOMEVALUE.sql" />
     <None Include="Objects\Stored Procs\SendQueueMessage.sql" />
@@ -96,6 +94,8 @@
     <Build Include="Objects\Stored Procs\QueueB_InActivationSProc.sql" />
     <Build Include="Objects\Services\ServiceB_In.sql" />
     <Build Include="Objects\Schema Collection\ValidatedData.sql" />
+    <Build Include="Objects\Table Types\QueueB_Results_TT.sql" />
+    <PostDeploy Include="Script.PostDeployment1.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Objects\Queues\QueueB_Out.sql" />

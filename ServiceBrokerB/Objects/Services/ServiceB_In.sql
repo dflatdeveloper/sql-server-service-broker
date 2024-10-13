@@ -1,6 +1,4 @@
-﻿USE ServiceBrokerB
-
-CREATE SERVICE [ServiceB_In]
+﻿CREATE SERVICE [ServiceB_In]
 	ON QUEUE [dbo].[QueueB_In]
 	(
 		[SBMessageContract]

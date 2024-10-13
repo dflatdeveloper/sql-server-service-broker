@@ -1,7 +1,4 @@
-﻿USE ServiceBrokerA
-GO
-
-CREATE MESSAGE TYPE [SenderMessageType]
+﻿CREATE MESSAGE TYPE [SenderMessageType]
 	VALIDATION = NONE
 GO
 

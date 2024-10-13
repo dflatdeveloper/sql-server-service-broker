@@ -1,6 +1,4 @@
-﻿USE ServiceBrokerB
-
-CREATE ROUTE [RouteA]
+﻿CREATE ROUTE [RouteA]
 	AUTHORIZATION [User_SERVICEBROKERA]
 	WITH
 		SERVICE_NAME = '[ServiceA_In]',

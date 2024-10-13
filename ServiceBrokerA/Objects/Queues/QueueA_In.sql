@@ -1,6 +1,4 @@
-﻿USE ServiceBrokerA
-
-CREATE QUEUE [dbo].[QueueA_In]
+﻿CREATE QUEUE [dbo].[QueueA_In]
 WITH STATUS = ON,
 ACTIVATION (STATUS = ON, 
 			PROCEDURE_NAME = [dbo].[QueueA_InActivationSProc],
