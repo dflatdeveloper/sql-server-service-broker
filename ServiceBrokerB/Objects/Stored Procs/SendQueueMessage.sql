@@ -1,6 +1,9 @@
-﻿CREATE PROCEDURE [dbo].[SendQueueMessage]
-	@param1 int = 0,
-	@param2 int
-AS
-	SELECT @param1, @param2
-RETURN 0
+﻿DECLARE @dialog_handle	UNIQUEIDENTIFIER
+
+BEGIN DIALOG @dialog_handle 
+	FROM SERVICE [SERVICEB_Out]
+	TO SERVICE 'ServiceA_In'
+	ON CONTRACT [EmptySBMessageContract];
+
+SEND ON CONVERSATION @dialog_handle
+	MESSAGE TYPE [EmptySenderMessageType];

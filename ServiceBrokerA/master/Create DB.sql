@@ -4,9 +4,9 @@ GO
 CREATE DATABASE [ServiceBrokerA]
  CONTAINMENT = NONE
  ON  PRIMARY 
-( NAME = N'ServiceBrokerA', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL16.MSSQLSERVER\MSSQL\DATA\ServiceBrokerA.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
+( NAME = N'ServiceBrokerA', FILENAME = N'C:\Users\dbms-\source\repos\sql-server-service-broker\Databases\ServiceBrokerA.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
  LOG ON 
-( NAME = N'ServiceBrokerA_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL16.MSSQLSERVER\MSSQL\DATA\ServiceBrokerA_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
+( NAME = N'ServiceBrokerA_log', FILENAME = N'C:\Users\dbms-\source\repos\sql-server-service-broker\Databases\ServiceBrokerA_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
  WITH CATALOG_COLLATION = DATABASE_DEFAULT, LEDGER = OFF
 GO
 

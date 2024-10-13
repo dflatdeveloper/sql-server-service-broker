@@ -22,6 +22,8 @@
     <SqlServerVerification>False</SqlServerVerification>
     <IncludeCompositeObjects>True</IncludeCompositeObjects>
     <TargetDatabaseSet>True</TargetDatabaseSet>
+    <PageVerify>CHECKSUM</PageVerify>
+    <ServiceBrokerOption>EnableBroker</ServiceBrokerOption>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>bin\Release\</OutputPath>
@@ -86,15 +88,15 @@
     <None Include="master\Create Endpoint.sql" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="master\Create Master Key.sql" />
-    <Build Include="user\Create Certificates.sql" />
-    <Build Include="user\Create Master Key.sql" />
+    <None Include="master\Create Master Key.sql" />
+    <None Include="user\Create Certificates.sql" />
+    <None Include="user\Create Master Key.sql" />
     <Build Include="Objects\Queues\QueueA_In.sql" />
     <Build Include="Objects\Contracts\SBMessageContract.sql" />
     <Build Include="Objects\Message Types\Create Sender.sql" />
     <Build Include="Objects\Message Types\Create Receiver.sql" />
     <Build Include="Objects\Routes\RouteB.sql" />
-    <None Include="Objects\Routes\RouteC.sql" />
+    <Build Include="Objects\Routes\RouteC.sql" />
     <Build Include="Objects\Services\ServiceA_In.sql" />
     <Build Include="Objects\Stored Procs\QueueA_InActivationSProc.sql" />
     <Build Include="Objects\Tables\SOMEVALUE.sql" />
@@ -102,7 +104,7 @@
     <Build Include="Objects\Queues\QueueA_Out.sql" />
     <Build Include="Objects\Services\ServiceA_Out.sql" />
     <Build Include="Objects\Stored Procs\QueueA_OutActivationSProc.sql" />
-    <None Include="Objects\Remote Service Binding\ServiceA_In.sql" />
-    <None Include="Objects\Remote Service Binding\ServiceA_Out.sql" />
+    <Build Include="Objects\Remote Service Binding\ServiceA_In.sql" />
+    <Build Include="Objects\Remote Service Binding\ServiceA_Out.sql" />
   </ItemGroup>
 </Project>

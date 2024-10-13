@@ -9,12 +9,12 @@ AS TABLE
 GO
 
 
-CREATE OR ALTER PROCEDURE [dbo].[QueueB_OutActivationSProc]
+CREATE OR ALTER PROCEDURE [dbo].[QueueB_InActivationSProc]
 AS
 	
-    DECLARE @QueueB [dbo].[QUEUEB_RESULTS_TT];
+    DECLARE @QueueB  QUEUEB_RESULTS_TT;
        
-	RECEIVE message_body FROM dbo.QueueB_In 
+	RECEIVE message_body FROM dbo.QueueB_In  
     INTO @QueueB
 
 
