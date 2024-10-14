@@ -1,9 +1,23 @@
-﻿DECLARE @dialog_handle	UNIQUEIDENTIFIER
+﻿CREATE PROCEDURE SendQueueMessage()
+AS
+BEGIN
+	DECLARE @dialog_handle	UNIQUEIDENTIFIER
 
-BEGIN DIALOG @dialog_handle 
-	FROM SERVICE [SERVICEB_Out]
-	TO SERVICE 'ServiceA_In'
-	ON CONTRACT [EmptySBMessageContract];
+	BEGIN TRANSACTION
 
-SEND ON CONVERSATION @dialog_handle
-	MESSAGE TYPE [EmptySenderMessageType];
+		BEGIN DIALOG CONVERSATION @dialog_handle 
+			FROM SERVICE 
+				[ServiceB_Out]
+			TO SERVICE 
+				N'ServiceA_In'
+			ON CONTRACT 
+				[SBMessageContract]
+			WITH ENCRYPTION = OFF;
+
+		 SEND ON CONVERSATION @dialog_handle
+				MESSAGE TYPE [SenderMessageType];
+
+		END CONVERSATION @dialog_handle
+
+	COMMIT
+END

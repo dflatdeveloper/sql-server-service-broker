@@ -2,5 +2,5 @@
 	AUTHORIZATION [User_SERVICEBROKERA]
 	WITH
 		SERVICE_NAME = '[ServiceA_In]',
-		ADDRESS = 'TCP://SB-A.home.local:4022',
+		ADDRESS = 'TCP://sb-a.home.local:4022',
 		BROKER_INSTANCE = '1a6cf5f2-85bc-4a31-a7a5-c6c96ecd2a0d'
