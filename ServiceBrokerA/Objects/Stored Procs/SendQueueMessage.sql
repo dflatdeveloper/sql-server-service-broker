@@ -11,13 +11,10 @@ BEGIN
 			TO SERVICE 
 				N'ServiceB_In'
 			ON CONTRACT 
-				[SBMessageContract]
-			WITH ENCRYPTION = OFF;
+				[SBMessageContract];
 
 		 SEND ON CONVERSATION @dialog_handle
-				MESSAGE TYPE [SenderMessageType];
-
-		END CONVERSATION @dialog_handle
+				MESSAGE TYPE [SenderMessageType]('test A Out');
 
 	COMMIT
 END

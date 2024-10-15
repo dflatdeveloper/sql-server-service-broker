@@ -9,7 +9,7 @@ Post-Deployment Script Template
                SELECT * FROM [$(TableName)]					
 --------------------------------------------------------------------------------------
 */
-:r ".\Objects\Routes\RouteB.sql"
-:r ".\Objects\Routes\RouteC.sql"
-:r ".\Objects\Remote Service Binding\ServiceA_In.sql"
-:r ".\Objects\Remote Service Binding\ServiceA_Out.sql"
+--:r ".\Objects\Routes\RouteB.sql"
+--:r ".\Objects\Routes\RouteC.sql"
+--:r ".\Objects\Remote Service Binding\ServiceA_In.sql"
+--:r ".\Objects\Remote Service Binding\ServiceA_Out.sql"

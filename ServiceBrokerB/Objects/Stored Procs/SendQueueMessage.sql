@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE SendQueueMessage()
+﻿CREATE PROCEDURE SendQueueMessage
 AS
 BEGIN
 	DECLARE @dialog_handle	UNIQUEIDENTIFIER
@@ -11,13 +11,10 @@ BEGIN
 			TO SERVICE 
 				N'ServiceA_In'
 			ON CONTRACT 
-				[SBMessageContract]
-			WITH ENCRYPTION = OFF;
+				[SBMessageContract];
 
 		 SEND ON CONVERSATION @dialog_handle
-				MESSAGE TYPE [SenderMessageType];
-
-		END CONVERSATION @dialog_handle
+				MESSAGE TYPE [SenderMessageType]('test B Out');
 
 	COMMIT
 END

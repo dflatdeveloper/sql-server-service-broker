@@ -1,0 +1,23 @@
+CREATE QUEUE dbo.SqlDependencyQueue;
+GO
+CREATE SERVICE SqlDependencyService AUTHORIZATION [dbo]
+ON QUEUE SqlDependencyQueue
+([http://schemas.microsoft.com/SQL/Notifications/PostQueryNotification]);
+GO
+CREATE ROUTE SqlDependencyRoute WITH SERVICE_NAME = 'SqlDependencyService', ADDRESS = 'LOCAL';
+GO
+GRANT SELECT to [ApplicationRole]
+GO
+GRANT SUBSCRIBE QUERY NOTIFICATIONS TO [ApplicationRole] 
+GO
+GRANT RECEIVE ON QueryNotificationErrorsQueue TO [ApplicationRole]
+GO
+GRANT REFERENCES on 
+CONTRACT::[http://schemas.microsoft.com/SQL/Notifications/PostQueryNotification]
+  to [ApplicationRole]
+GO
+
+GRANT RECEIVE ON SqlDependencyQueue TO [ApplicationRole]
+GO
+GRANT SEND ON SERVICE::SqlDependencyService TO [ApplicationRole]
+GO

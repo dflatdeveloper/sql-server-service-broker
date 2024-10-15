@@ -7,6 +7,7 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "ServiceBrokerB", "ServiceBr
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A49EFCB8-62A4-4493-8A06-5442F379DD85}"
 	ProjectSection(SolutionItems) = preProject
+		Integration Notes.txt = Integration Notes.txt
 		README.md = README.md
 	EndProjectSection
 EndProject

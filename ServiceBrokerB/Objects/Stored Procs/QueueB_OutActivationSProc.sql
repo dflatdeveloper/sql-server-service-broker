@@ -1,14 +1,37 @@
 ﻿CREATE PROCEDURE [dbo].[QueueB_OutActivationSProc]
 AS
-	
-    DECLARE @QueueB  QUEUEB_RESULTS_TT;
-       
-	RECEIVE message_body FROM dbo.QueueB_Out  
-    INTO @QueueB
+BEGIN
+	SET NOCOUNT ON
 
+	BEGIN TRAN
+      
+    DECLARE @Conversation_Handle UNIQUEIDENTIFIER,
+            @MessageBody VARCHAR(MAX),
+            @MessageType NVARCHAR(MAX),
+            @MessageSequenceNumber INT
 
-    select * from @QueueB
-   
-	
+    BEGIN TRY    
+        
+        ;RECEIVE 
+            @Conversation_Handle = CAST(conversation_handle AS UNIQUEIDENTIFIER),
+            @MessageBody = CAST(message_body AS VARCHAR(MAX)), 
+            @MessageType = CAST(message_type_name AS NVARCHAR(MAX)),
+            @MessageSequenceNumber = CAST(message_sequence_number AS INT)
+        FROM dbo.QueueB_Out;
 
-RETURN 0
+        Print @MessageType
+
+        IF (@MessageType = 'ReceiverMessageType')
+        BEGIN
+            INSERT INTO SOMEVALUE (MSG_Contents) VALUES (@MessageBody);
+
+            END CONVERSATION @Conversation_Handle
+        END
+
+        COMMIT
+
+    END TRY
+    BEGIN CATCH
+        ROLLBACK
+    END CATCH
+END
