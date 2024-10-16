@@ -7,7 +7,6 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "ServiceBrokerB", "ServiceBr
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A49EFCB8-62A4-4493-8A06-5442F379DD85}"
 	ProjectSection(SolutionItems) = preProject
-		Integration Notes.txt = Integration Notes.txt
 		README.md = README.md
 	EndProjectSection
 EndProject
@@ -32,6 +31,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Certificates", "Certificate
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "ServiceBrokerA", "ServiceBrokerA\ServiceBrokerA.sqlproj", "{21C4DEB6-6B6C-4696-B8D1-D0AA3ED36F38}"
 EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "ServiceBrokerC", "ServiceBrokerC\ServiceBrokerC.sqlproj", "{824894F0-04FC-47B8-AFC8-CB96CEE8B732}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -50,6 +51,12 @@ Global
 		{21C4DEB6-6B6C-4696-B8D1-D0AA3ED36F38}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{21C4DEB6-6B6C-4696-B8D1-D0AA3ED36F38}.Release|Any CPU.Build.0 = Release|Any CPU
 		{21C4DEB6-6B6C-4696-B8D1-D0AA3ED36F38}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{824894F0-04FC-47B8-AFC8-CB96CEE8B732}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{824894F0-04FC-47B8-AFC8-CB96CEE8B732}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{824894F0-04FC-47B8-AFC8-CB96CEE8B732}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{824894F0-04FC-47B8-AFC8-CB96CEE8B732}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{824894F0-04FC-47B8-AFC8-CB96CEE8B732}.Release|Any CPU.Build.0 = Release|Any CPU
+		{824894F0-04FC-47B8-AFC8-CB96CEE8B732}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

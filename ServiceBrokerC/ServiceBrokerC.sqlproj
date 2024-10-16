@@ -3,16 +3,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <Name>ServiceBrokerA</Name>
+    <Name>ServiceBrokerC</Name>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
-    <ProjectGuid>{21c4deb6-6b6c-4696-b8d1-d0aa3ed36f38}</ProjectGuid>
+    <ProjectGuid>{824894f0-04fc-47b8-afc8-cb96cee8b732}</ProjectGuid>
     <DSP>Microsoft.Data.Tools.Schema.Sql.Sql160DatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
     <RootPath>
     </RootPath>
-    <RootNamespace>ServiceBrokerA</RootNamespace>
-    <AssemblyName>ServiceBrokerA</AssemblyName>
+    <RootNamespace>ServiceBrokerC</RootNamespace>
+    <AssemblyName>ServiceBrokerC</AssemblyName>
     <ModelCollation>1033, CI</ModelCollation>
     <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
     <DeployToDatabase>True</DeployToDatabase>
@@ -22,8 +22,6 @@
     <SqlServerVerification>False</SqlServerVerification>
     <IncludeCompositeObjects>True</IncludeCompositeObjects>
     <TargetDatabaseSet>True</TargetDatabaseSet>
-    <PageVerify>CHECKSUM</PageVerify>
-    <ServiceBrokerOption>EnableBroker</ServiceBrokerOption>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>bin\Release\</OutputPath>
@@ -61,50 +59,36 @@
     <Folder Include="master" />
     <Folder Include="user" />
     <Folder Include="Objects" />
-    <Folder Include="Objects\Message Types" />
     <Folder Include="Objects\Contracts" />
-    <Folder Include="Objects\Remote Service Binding" />
-    <Folder Include="Objects\Services" />
+    <Folder Include="Objects\Message Types" />
     <Folder Include="Objects\Queues" />
     <Folder Include="Objects\Routes" />
-    <Folder Include="Objects\Stored Procs" />
-    <Folder Include="Objects\Tables" />
     <Folder Include="Objects\Schema Collection" />
-  </ItemGroup>
-  <ItemGroup>
-    <PostDeploy Include="Script.PostDeployment1.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <PreDeploy Include="Script.PreDeployment1.sql" />
+    <Folder Include="Objects\Services" />
+    <Folder Include="Objects\Stored Procs" />
+    <Folder Include="Objects\Event Notifications" />
+    <Folder Include="Objects\Tables" />
   </ItemGroup>
   <ItemGroup>
     <None Include="master\Create DB.sql" />
-    <None Include="Objects\Stored Procs\SendQueueMessage.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="master\Create Certificates.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="master\Create Endpoint.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="master\Create Master Key.sql" />
-    <None Include="user\Create Certificates.sql" />
-    <None Include="user\Create Master Key.sql" />
-    <Build Include="Objects\Queues\QueueA_In.sql" />
+    <Build Include="user\Create Certificates.sql" />
+    <Build Include="user\Create Master Key.sql" />
     <Build Include="Objects\Contracts\SBMessageContract.sql" />
-    <Build Include="Objects\Message Types\Create Sender.sql" />
     <Build Include="Objects\Message Types\Create Receiver.sql" />
-    <None Include="Objects\Routes\RouteB.sql" />
-    <None Include="Objects\Routes\RouteC.sql" />
-    <Build Include="Objects\Services\ServiceA_In.sql" />
-    <Build Include="Objects\Stored Procs\QueueA_InActivationSProc.sql" />
-    <Build Include="Objects\Tables\SOMEVALUE.sql" />
+    <Build Include="Objects\Message Types\Create Sender.sql" />
+    <Build Include="Objects\Queues\QueueC_In.sql" />
+    <None Include="Objects\Routes\RouteA.sql" />
     <Build Include="Objects\Schema Collection\ValidatedData.sql" />
-    <Build Include="Objects\Queues\QueueA_Out.sql" />
-    <Build Include="Objects\Services\ServiceA_Out.sql" />
-    <Build Include="Objects\Stored Procs\QueueA_OutActivationSProc.sql" />
-    <None Include="Objects\Remote Service Binding\ServiceA_In.sql" />
-    <None Include="Objects\Remote Service Binding\ServiceA_Out.sql" />
+    <Build Include="Objects\Services\ServiceC_In.sql" />
+    <Build Include="Objects\Stored Procs\QueueC_InActivationSProc.sql" />
+    <Build Include="Objects\Queues\NotificationQueueC.sql" />
+    <Build Include="Objects\Services\NotificationServiceC.sql" />
+    <Build Include="Objects\Event Notifications\EventNotificationC.sql" />
+    <Build Include="Objects\Services\ServiceC_Out.sql" />
+    <Build Include="Objects\Queues\QueueC_Out.sql" />
+    <Build Include="Objects\Tables\SOMEVALUE.sql" />
+    <Build Include="Objects\Stored Procs\QueueC_OutActivationSProc.sql" />
   </ItemGroup>
 </Project>

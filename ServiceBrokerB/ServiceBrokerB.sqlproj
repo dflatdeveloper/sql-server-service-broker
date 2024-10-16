@@ -69,7 +69,6 @@
     <Folder Include="Objects\Stored Procs" />
     <Folder Include="Objects\Tables" />
     <Folder Include="Objects\Schema Collection" />
-    <Folder Include="Objects\Table Types" />
   </ItemGroup>
   <ItemGroup>
     <PreDeploy Include="Script.PreDeployment1.sql" />
@@ -95,7 +94,6 @@
     <Build Include="Objects\Stored Procs\QueueB_InActivationSProc.sql" />
     <Build Include="Objects\Services\ServiceB_In.sql" />
     <Build Include="Objects\Schema Collection\ValidatedData.sql" />
-    <Build Include="Objects\Table Types\QueueB_Results_TT.sql" />
     <PostDeploy Include="Script.PostDeployment1.sql" />
   </ItemGroup>
   <ItemGroup>
