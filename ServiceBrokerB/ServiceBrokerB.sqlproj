@@ -77,14 +77,12 @@
     <None Include="master\Create DB.sql" />
     <None Include="master\Create Certificates.sql" />
     <None Include="master\Create Endpoint.sql" />
-    <None Include="Objects\Routes\RouteC.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="user\Create Certificates.sql" />
     <None Include="master\Create Master Key.sql" />
     <None Include="Objects\Routes\RouteA.sql" />
     <Build Include="Objects\Stored Procs\QueueB_OutActivationSProc.sql" />
-    <Build Include="Objects\Tables\SOMEVALUE.sql" />
     <None Include="Objects\Stored Procs\SendQueueMessage.sql" />
     <Build Include="Objects\Contracts\SBMessageContract.sql" />
     <Build Include="Objects\Message Types\Create Receiver.sql" />
@@ -95,6 +93,7 @@
     <Build Include="Objects\Services\ServiceB_In.sql" />
     <Build Include="Objects\Schema Collection\ValidatedData.sql" />
     <PostDeploy Include="Script.PostDeployment1.sql" />
+    <Build Include="Objects\Tables\Payload.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Objects\Queues\QueueB_Out.sql" />

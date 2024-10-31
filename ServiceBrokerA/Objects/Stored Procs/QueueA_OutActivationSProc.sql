@@ -4,8 +4,6 @@ BEGIN
 	SET NOCOUNT ON
 
 	BEGIN TRAN
-
-    DECLARE @QueueB  QUEUEA_RESULTS_TT;
        
     DECLARE @Conversation_Handle UNIQUEIDENTIFIER,
             @MessageBody VARCHAR(MAX),
@@ -25,7 +23,7 @@ BEGIN
 
         IF (@MessageType = 'ReceiverMessageType')
         BEGIN
-            INSERT INTO SOMEVALUE (MSG_Contents) VALUES (@MessageBody);
+            UPDATE Payload SET ReceiverAcknowledged = 1 WHERE ID = 1 -- Change this to ID from message
 
             END CONVERSATION @Conversation_Handle
         END

@@ -68,6 +68,7 @@
     <Folder Include="Objects\Stored Procs" />
     <Folder Include="Objects\Event Notifications" />
     <Folder Include="Objects\Tables" />
+    <Folder Include="Objects\Types" />
   </ItemGroup>
   <ItemGroup>
     <None Include="master\Create DB.sql" />
@@ -88,7 +89,8 @@
     <Build Include="Objects\Event Notifications\EventNotificationC.sql" />
     <Build Include="Objects\Services\ServiceC_Out.sql" />
     <Build Include="Objects\Queues\QueueC_Out.sql" />
-    <Build Include="Objects\Tables\SOMEVALUE.sql" />
     <Build Include="Objects\Stored Procs\QueueC_OutActivationSProc.sql" />
+    <Build Include="Objects\Tables\Payload.sql" />
+    <Build Include="Objects\Types\Payload_TT.sql" />
   </ItemGroup>
 </Project>
