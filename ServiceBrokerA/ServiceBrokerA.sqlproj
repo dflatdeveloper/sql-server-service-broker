@@ -71,6 +71,8 @@
     <Folder Include="Objects\Tables" />
     <Folder Include="Objects\Schema Collection" />
     <Folder Include="Objects\Types" />
+    <Folder Include="user\security" />
+    <Folder Include="master\security" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Script.PostDeployment1.sql" />
@@ -81,37 +83,73 @@
   <ItemGroup>
     <None Include="master\Create DB.sql" />
     <None Include="Objects\Stored Procs\SendQueueMessage.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="master\Create Certificates.sql" />
+    <None Include="user\security\Create Remote User.sql" />
+    <None Include="user\security\Create Remote Certificate.sql" />
+    <None Include="user\security\Grant Connect To Service.sql" />
+    <None Include="Objects\Routes\Route_In.sql" />
+    <None Include="Objects\Routes\Route_Out.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="master\Create Endpoint.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="master\Create Master Key.sql" />
-    <None Include="user\Create Certificates.sql" />
-    <None Include="user\Create Master Key.sql" />
     <Build Include="Objects\Queues\QueueA_In.sql" />
     <Build Include="Objects\Contracts\SBMessageContract.sql" />
     <Build Include="Objects\Message Types\Create Sender.sql" />
     <Build Include="Objects\Message Types\Create Receiver.sql" />
-    <None Include="Objects\Routes\RouteB.sql" />
-    <None Include="Objects\Routes\RouteC.sql" />
     <Build Include="Objects\Services\ServiceA_In.sql" />
     <Build Include="Objects\Stored Procs\QueueA_InActivationSProc.sql" />
     <Build Include="Objects\Schema Collection\ValidatedData.sql" />
     <Build Include="Objects\Queues\QueueA_Out.sql" />
     <Build Include="Objects\Services\ServiceA_Out.sql" />
     <Build Include="Objects\Stored Procs\QueueA_OutActivationSProc.sql" />
-    <None Include="Objects\Remote Service Binding\ServiceA_In.sql" />
-    <None Include="Objects\Remote Service Binding\ServiceA_Out.sql" />
+    <None Include="Objects\Remote Service Binding\Create Outbound Binding.sql" />
+    <None Include="Objects\Remote Service Binding\Create Inbound Binding.sql" />
+    <None Include="master\security\Grant Connect To Endpoint.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Objects\Tables\Payload.sql" />
     <Build Include="Objects\Types\Payload_TT.sql" />
+    <None Include="user\security\Create Local Certificate.sql" />
+    <None Include="user\security\Create Master Key.sql" />
+    <None Include="master\security\Create Certificates.sql" />
+    <None Include="master\security\Create Login.sql" />
+    <None Include="master\security\Create Master Key.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <RefactorLog Include="ServiceBrokerA.refactorlog" />
+    <SqlCmdVariable Include="CERTIFICATE_PASSWORD">
+      <DefaultValue>Password123!@</DefaultValue>
+      <Value>$(SqlCmdVar__3)</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="CERTIFICATE_PATH">
+      <DefaultValue>C:\Users\dbms-\source\repos\sql-server-service-broker\Certificates</DefaultValue>
+      <Value>$(SqlCmdVar__1)</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="LOCAL_SERVICE_NAME">
+      <DefaultValue>ServiceA</DefaultValue>
+      <Value>$(SqlCmdVar__4)</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="MASTER_KEY_PASSWORD">
+      <DefaultValue>Password123!@#</DefaultValue>
+      <Value>$(SqlCmdVar__5)</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="REMOTE_BROKER_ID">
+      <DefaultValue>2a0ccde4-9f72-4f51-997d-13df134cb55e</DefaultValue>
+      <Value>$(SqlCmdVar__8)</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="REMOTE_SERVICE_ADDRESS">
+      <DefaultValue>TCP://SB-B.home.local:4022</DefaultValue>
+      <Value>$(SqlCmdVar__7)</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="REMOTE_SERVICE_NAME_">
+      <DefaultValue>ServiceB</DefaultValue>
+      <Value>$(SqlCmdVar__6)</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="SERVICE_BROKER_REMOTE">
+      <DefaultValue>SERVICEBROKERB</DefaultValue>
+      <Value>$(SqlCmdVar__2)</Value>
+    </SqlCmdVariable>
   </ItemGroup>
 </Project>

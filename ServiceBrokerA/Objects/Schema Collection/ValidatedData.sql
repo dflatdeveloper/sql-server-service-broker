@@ -6,7 +6,6 @@ N'<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" x
     <xs:sequence>
       <xs:element type="xs:int" name="id"/>
       <xs:element type="xs:string" name="content"/>
-      <xs:element type="xs:boolean" name="receiverAcknowledged"/>
     </xs:sequence>
   </xs:complexType>
 </xs:schema>'
