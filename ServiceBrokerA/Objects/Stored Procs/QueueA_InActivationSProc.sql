@@ -23,7 +23,7 @@ BEGIN
 
         IF (@MessageType = 'SenderMessageType')
         BEGIN
-            UPDATE Payload SET CONTENT = '' WHERE ID = 1 -- REMOVE HARDCODING
+            UPDATE Payload SET CONTENT = '' WHERE ID = 1; -- REMOVE HARDCODING
                                
             SEND ON CONVERSATION @Conversation_Handle
 				MESSAGE TYPE [ReceiverMessageType]('Test A In'); -- REMOVE HARD CODING

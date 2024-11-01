@@ -23,7 +23,7 @@ BEGIN
 
         IF (@MessageType = 'ReceiverMessageType')
         BEGIN
-            UPDATE Payload SET ReceiverAcknowledged = 1 WHERE ID = 1 -- Change this to ID from message
+            UPDATE Payload SET ReceiverAcknowledged = 1 WHERE ID = 1; -- Change this to ID from message
 
             END CONVERSATION @Conversation_Handle
         END

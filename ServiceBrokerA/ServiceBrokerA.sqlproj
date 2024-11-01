@@ -81,7 +81,6 @@
     <PreDeploy Include="Script.PreDeployment1.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="master\Create DB.sql" />
     <None Include="Objects\Stored Procs\SendQueueMessage.sql" />
     <None Include="user\security\Create Remote User.sql" />
     <None Include="user\security\Create Remote Certificate.sql" />
@@ -124,8 +123,12 @@
       <Value>$(SqlCmdVar__3)</Value>
     </SqlCmdVariable>
     <SqlCmdVariable Include="CERTIFICATE_PATH">
-      <DefaultValue>C:\Users\dbms-\source\repos\sql-server-service-broker\Certificates</DefaultValue>
+      <DefaultValue>C:\Users\dbms-\source\repos\sql-server-service-broker\Certificates\</DefaultValue>
       <Value>$(SqlCmdVar__1)</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="GENERATE_ROUTES">
+      <DefaultValue>0</DefaultValue>
+      <Value>$(SqlCmdVar__9)</Value>
     </SqlCmdVariable>
     <SqlCmdVariable Include="LOCAL_SERVICE_NAME">
       <DefaultValue>ServiceA</DefaultValue>
