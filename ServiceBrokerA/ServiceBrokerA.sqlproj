@@ -81,12 +81,11 @@
     <PreDeploy Include="Script.PreDeployment1.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Objects\Stored Procs\SendQueueMessage.sql" />
     <None Include="user\security\Create Remote User.sql" />
     <None Include="user\security\Create Remote Certificate.sql" />
     <None Include="user\security\Grant Connect To Service.sql" />
-    <None Include="Objects\Routes\Route_In.sql" />
-    <None Include="Objects\Routes\Route_Out.sql" />
+    <None Include="Objects\Routes\Inbound Route.sql" />
+    <None Include="Objects\Routes\Outbound Route.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="master\Create Endpoint.sql" />
@@ -97,14 +96,15 @@
     <Build Include="Objects\Message Types\Create Sender.sql" />
     <Build Include="Objects\Message Types\Create Receiver.sql" />
     <Build Include="Objects\Services\ServiceA_In.sql" />
-    <Build Include="Objects\Stored Procs\QueueA_InActivationSProc.sql" />
+    <Build Include="Objects\Stored Procs\usp_QueueA_Activation_In.sql" />
     <Build Include="Objects\Schema Collection\ValidatedData.sql" />
     <Build Include="Objects\Queues\QueueA_Out.sql" />
     <Build Include="Objects\Services\ServiceA_Out.sql" />
-    <Build Include="Objects\Stored Procs\QueueA_OutActivationSProc.sql" />
-    <None Include="Objects\Remote Service Binding\Create Outbound Binding.sql" />
-    <None Include="Objects\Remote Service Binding\Create Inbound Binding.sql" />
+    <Build Include="Objects\Stored Procs\usp_QueueA_Activation_Out.sql" />
+    <None Include="Objects\Remote Service Binding\Outbound Binding.sql" />
+    <None Include="Objects\Remote Service Binding\Inbound Binding.sql" />
     <None Include="master\security\Grant Connect To Endpoint.sql" />
+    <Build Include="Objects\Stored Procs\usp_InsertPayload.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Objects\Tables\Payload.sql" />

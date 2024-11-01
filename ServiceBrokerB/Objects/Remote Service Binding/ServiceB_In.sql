@@ -1,6 +1,0 @@
-﻿USE ServiceBrokerB
-
-CREATE REMOTE SERVICE BINDING ServiceBindingServiceA_In
-	TO SERVICE 'ServiceA_Out'
-	WITH USER = USER_SERVICEBROKERA
-GO
