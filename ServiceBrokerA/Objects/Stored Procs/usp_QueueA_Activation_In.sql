@@ -10,7 +10,8 @@ BEGIN
             @MessageType NVARCHAR(MAX),
             @MessageSequenceNumber INT,
             @ErrorMessage NVARCHAR(4000),  
-            @ErrorNumber INT
+            @ErrorNumber INT,
+            @PayloadData XML
 
     BEGIN TRY    
         
@@ -21,12 +22,20 @@ BEGIN
             @MessageSequenceNumber = CAST(message_sequence_number AS INT)
         FROM dbo.QueueA_In;
 
-        IF (@MessageType = 'SenderMessageType')
+        IF (@MessageType = 'ValidatedSenderMessageType')
         BEGIN
-            UPDATE Payload SET CONTENT = '' WHERE ID = 1; -- REMOVE HARDCODING
+
+            DECLARE @XmlData_Request XML =  CAST(@MessageBody AS XML)
+            DECLARE @XmlData_Response XML
+
+            INSERT INTO @PayloadData
+            SELECT 
+            T.D.VALUE('/payloads/payload/id[1]', 'int') id,
+            T.D.Value('/payloads/payload/content[1]','nvarchar(-1)') content
+            FROM @XmlData_Request.nodes('.') T(D)
                                
             SEND ON CONVERSATION @Conversation_Handle
-				MESSAGE TYPE [ReceiverMessageType]('Test A In'); -- REMOVE HARD CODING
+				MESSAGE TYPE [ReceiverMessageType]('Recieved'); -- REMOVE HARD CODING
         END
         ELSE IF (@MessageType = 'http://schemas.microsoft.com/SQL/ServiceBroker/EndDialog')
         BEGIN
@@ -39,6 +48,20 @@ BEGIN
 
             BEGIN TRY
 
+
+		        --IN THIS EXAMPLE WE ONLY WANT NEW RECORDS
+		        --IN REALITY WE WOULD HANDLE UPDATES IN THIS CALL TOO
+		        INSERT INTO @PayloadData
+		        SELECT Id,
+		               Content
+		        FROM Payload
+                --Use a where clause to send only the update with modified dates
+
+		        SET @PayloadData = (SELECT id,
+								           content
+							        FROM @PayloadData
+							        FOR XML PATH ('payload'), ROOT('payloads'));
+
                 BEGIN DIALOG CONVERSATION @dialog_handle 
 			    FROM SERVICE 
 				    [ServiceA_Out]
@@ -48,7 +71,7 @@ BEGIN
 				    [SBMessageContract];
 
 		        SEND ON CONVERSATION @dialog_handle
-				        MESSAGE TYPE [SenderMessageType]('test A Out');
+				        MESSAGE TYPE [ValidatedSenderMessageType](@PayloadData);
 
                 END CONVERSATION @Conversation_Handle
             END TRY

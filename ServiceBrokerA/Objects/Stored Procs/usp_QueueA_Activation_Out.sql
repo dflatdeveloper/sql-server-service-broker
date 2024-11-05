@@ -23,7 +23,21 @@ BEGIN
 
         IF (@MessageType = 'ReceiverMessageType')
         BEGIN
-            UPDATE Payload SET ReceiverAcknowledged = 1 WHERE ID = 1; -- Change this to ID from message
+            DECLARE @XmlData_Request XML =  CAST(@MessageBody AS XML)
+            DECLARE @XmlData_Response XML
+            DECLARE @PayloadData Payload_TT
+
+            INSERT INTO @PayloadData
+            SELECT 
+            T.D.VALUE('/payloads/payload/id[1]', 'int') id,
+            T.D.Value('/payloads/payload/content[1]','nvarchar(-1)') content
+            FROM @XmlData_Request.nodes('.') T(D)
+
+
+            UPDATE Payload 
+            SET ReceiverAcknowledged = 1
+            FROM Payload P JOIN @PayloadData D  ON P.Id = D.Id
+
 
             END CONVERSATION @Conversation_Handle
         END
