@@ -56,8 +56,6 @@
   <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
   <ItemGroup>
     <Folder Include="Properties" />
-    <Folder Include="master" />
-    <Folder Include="user" />
     <Folder Include="Objects" />
     <Folder Include="Objects\Contracts" />
     <Folder Include="Objects\Message Types" />
@@ -68,27 +66,82 @@
     <Folder Include="Objects\Stored Procs" />
     <Folder Include="Objects\Event Notifications" />
     <Folder Include="Objects\Tables" />
+    <Folder Include="Objects\Types" />
+    <Folder Include="master" />
+    <Folder Include="master\security" />
+    <Folder Include="user" />
+    <Folder Include="user\security" />
+    <Folder Include="Objects\Remote Service Binding" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="master\Create DB.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <Build Include="user\Create Certificates.sql" />
-    <Build Include="user\Create Master Key.sql" />
     <Build Include="Objects\Contracts\SBMessageContract.sql" />
     <Build Include="Objects\Message Types\Create Receiver.sql" />
     <Build Include="Objects\Message Types\Create Sender.sql" />
     <Build Include="Objects\Queues\QueueC_In.sql" />
-    <None Include="Objects\Routes\RouteA.sql" />
     <Build Include="Objects\Schema Collection\ValidatedData.sql" />
-    <Build Include="Objects\Services\ServiceC_In.sql" />
-    <Build Include="Objects\Stored Procs\QueueC_InActivationSProc.sql" />
-    <Build Include="Objects\Queues\NotificationQueueC.sql" />
-    <Build Include="Objects\Services\NotificationServiceC.sql" />
-    <Build Include="Objects\Event Notifications\EventNotificationC.sql" />
-    <Build Include="Objects\Services\ServiceC_Out.sql" />
+    <Build Include="Objects\Stored Procs\usp_QueueC_Activation_In.sql" />
+    <Build Include="Objects\Queues\Queue Workflow Notification.sql" />
+    <Build Include="Objects\Services\Workflow Notification.sql" />
+    <Build Include="Objects\Event Notifications\Workflow Event.sql" />
     <Build Include="Objects\Queues\QueueC_Out.sql" />
-    <Build Include="Objects\Tables\SOMEVALUE.sql" />
-    <Build Include="Objects\Stored Procs\QueueC_OutActivationSProc.sql" />
+    <Build Include="Objects\Stored Procs\usp_QueueC_Activation_Out.sql" />
+    <Build Include="Objects\Tables\Payload.sql" />
+    <Build Include="Objects\Types\Payload_TT.sql" />
+    <None Include="master\security\Create Certificates.sql" />
+    <None Include="master\security\Create Login.sql" />
+    <None Include="master\security\Create Master Key.sql" />
+    <None Include="master\security\Grant Connect To Endpoint.sql" />
+    <None Include="master\Create Endpoint.sql" />
+    <None Include="user\security\Create Local Certificate.sql" />
+    <None Include="user\security\Create Master Key.sql" />
+    <None Include="user\security\Create Remote Certificate.sql" />
+    <None Include="user\security\Create Remote User.sql" />
+    <None Include="user\security\Grant Connect To Service.sql" />
+    <None Include="Objects\Routes\Inbound Route.sql" />
+    <None Include="Objects\Routes\Outbound Route.sql" />
+    <Build Include="Objects\Services\ServiceC_In.sql" />
+    <Build Include="Objects\Services\ServiceC_Out.sql" />
+    <PostDeploy Include="Script.PostDeployment1.sql" />
+    <PreDeploy Include="Script.PreDeployment1.sql" />
+    <None Include="Objects\Remote Service Binding\Inbound Binding.sql" />
+    <None Include="Objects\Remote Service Binding\Outbound Binding.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <SqlCmdVariable Include="CERTIFICATE_PASSWORD">
+      <DefaultValue>Password123!@</DefaultValue>
+      <Value>$(SqlCmdVar__3)</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="CERTIFICATE_PATH">
+      <DefaultValue>C:\Users\dbms-\source\repos\sql-server-service-broker\Certificates\</DefaultValue>
+      <Value>$(SqlCmdVar__1)</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="GENERATE_ROUTES">
+      <DefaultValue>0</DefaultValue>
+      <Value>$(SqlCmdVar__9)</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="LOCAL_SERVICE_NAME">
+      <DefaultValue>ServiceC</DefaultValue>
+      <Value>$(SqlCmdVar__4)</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="MASTER_KEY_PASSWORD">
+      <DefaultValue>Password123!@#</DefaultValue>
+      <Value>$(SqlCmdVar__5)</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="REMOTE_BROKER_ID">
+      <DefaultValue>b211ffd0-3bd3-405d-811c-76cd1c890810</DefaultValue>
+      <Value>$(SqlCmdVar__8)</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="REMOTE_SERVICE_ADDRESS">
+      <DefaultValue>TCP://SB-A.home.local:4022</DefaultValue>
+      <Value>$(SqlCmdVar__7)</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="REMOTE_SERVICE_NAME_">
+      <DefaultValue>ServiceA</DefaultValue>
+      <Value>$(SqlCmdVar__6)</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="SERVICE_BROKER_REMOTE">
+      <DefaultValue>SERVICEBROKERA</DefaultValue>
+      <Value>$(SqlCmdVar__2)</Value>
+    </SqlCmdVariable>
   </ItemGroup>
 </Project>

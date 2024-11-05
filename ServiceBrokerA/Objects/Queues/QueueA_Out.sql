@@ -1,6 +1,6 @@
 ﻿CREATE QUEUE [dbo].[QueueA_Out]
 WITH STATUS = ON,
 ACTIVATION (STATUS = ON, 
-			PROCEDURE_NAME = [dbo].[QueueA_OutActivationSProc],
+			PROCEDURE_NAME = [dbo].[usp_QueueA_Activation_Out],
 			EXECUTE AS SELF,
 			MAX_QUEUE_READERS = 10);
