@@ -21,24 +21,37 @@ BEGIN
             @MessageSequenceNumber = CAST(message_sequence_number AS INT)
         FROM dbo.QueueA_Out;
 
-        IF (@MessageType = 'ReceiverMessageType')
+        IF (@MessageType = 'ValidatedReceiverMessageType')
         BEGIN
-            DECLARE @XmlData_Request XML =  CAST(@MessageBody AS XML)
-            DECLARE @XmlData_Response XML
-            DECLARE @PayloadData Payload_TT
+            END CONVERSATION @Conversation_Handle
+        END
+        ELSE IF (@MessageType = 'ErrorReceiverMessageType')
+        BEGIN
+            -- IN REALITY WE WOULD HANDLE SOME RETRY FROM THE ERROR ID AND DESCRIPTION
+
+            DECLARE @XmlData_Response XML (ErrorData) =  CAST(@MessageBody AS XML)
+            DECLARE @PayloadData [dbo].ReceiverError_TT
 
             INSERT INTO @PayloadData
             SELECT 
-            T.D.VALUE('/payloads/payload/id[1]', 'int') id,
-            T.D.Value('/payloads/payload/content[1]','nvarchar(-1)') content
-            FROM @XmlData_Request.nodes('.') T(D)
+            response.data.value('id[1]', 'int') id,
+            response.data.value('errorId[1]','int') error_id,
+            response.data.value('errorDescription[1]','nvarchar(max)') error_description
+            FROM @XmlData_Response.nodes('/errors/error') response(data) 
 
-
-            UPDATE Payload 
-            SET ReceiverAcknowledged = 1
-            FROM Payload P JOIN @PayloadData D  ON P.Id = D.Id
-
-
+            --IN REALITY SOMETHING ELSE WOULD BE DONE
+            --NOTHING WOULD BE LISTENING TO THIS RESULTSET
+            SELECT Id,
+                   Error_ID,
+                   Error_Description
+            FROM @PayloadData
+            
+        END
+        ELSE IF (@MessageType = 'http://schemas.microsoft.com/SQL/ServiceBroker/Error')
+        BEGIN
+            
+            --THIS IS A SYSTEM ERROR SUCH AS XML VALIDATION ERROR, CERTIFICATE ERROR, ETC
+            --WE WOULD NEED TO ADDRESS THIS ERROR AS A RETRY IF POSSIBLE, OR SOMETHING ELSE TO PREVENT A POISON MESSAGE
             END CONVERSATION @Conversation_Handle
         END
 

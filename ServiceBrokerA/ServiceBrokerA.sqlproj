@@ -105,6 +105,8 @@
     <None Include="Objects\Remote Service Binding\Inbound Binding.sql" />
     <None Include="master\security\Grant Connect To Endpoint.sql" />
     <Build Include="Objects\Stored Procs\usp_InsertPayload.sql" />
+    <Build Include="Objects\Types\ReceiverError_TT.sql" />
+    <Build Include="Objects\Schema Collection\ErrorData.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Objects\Tables\Payload.sql" />
@@ -119,7 +121,7 @@
   </ItemGroup>
   <ItemGroup>
     <SqlCmdVariable Include="CERTIFICATE_PASSWORD">
-      <DefaultValue>Password123!@</DefaultValue>
+      <DefaultValue>Password123!@#</DefaultValue>
       <Value>$(SqlCmdVar__3)</Value>
     </SqlCmdVariable>
     <SqlCmdVariable Include="CERTIFICATE_PATH">

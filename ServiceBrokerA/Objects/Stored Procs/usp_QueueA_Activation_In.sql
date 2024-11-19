@@ -11,7 +11,7 @@ BEGIN
             @MessageSequenceNumber INT,
             @ErrorMessage NVARCHAR(4000),  
             @ErrorNumber INT,
-            @PayloadData XML
+            @PayloadData [dbo].[Payload_TT]
 
     BEGIN TRY    
         
@@ -25,75 +25,44 @@ BEGIN
         IF (@MessageType = 'ValidatedSenderMessageType')
         BEGIN
 
-            DECLARE @XmlData_Request XML =  CAST(@MessageBody AS XML)
-            DECLARE @XmlData_Response XML
+            DECLARE @XmlData_Request XML (ValidatedData) =  CAST(@MessageBody AS XML)
 
             INSERT INTO @PayloadData
             SELECT 
-            T.D.VALUE('/payloads/payload/id[1]', 'int') id,
-            T.D.Value('/payloads/payload/content[1]','nvarchar(-1)') content
-            FROM @XmlData_Request.nodes('.') T(D)
+            request.data.value('id[1]', 'int') id,
+            request.data.value('content[1]','nvarchar(max)') content
+            FROM @XmlData_Request.nodes('/payloads/payload') request(data)
                                
+                               
+            UPDATE Payload
+            SET ReceiverAcknowledged = 1,
+                Content = d.Content
+            FROM Payload p 
+            JOIN @PayloadData d ON p.Id = d.Id;
+
             SEND ON CONVERSATION @Conversation_Handle
-				MESSAGE TYPE [ReceiverMessageType]('Recieved'); -- REMOVE HARD CODING
+				MESSAGE TYPE [EmptyReceiverMessageType]; -- EMPTY MESSAGE MEANS SUCCESS (in this context), BELOW IN CATCH BLOCK IS HOW TO SEND APPLICATION EXCEPTIONS
         END
         ELSE IF (@MessageType = 'http://schemas.microsoft.com/SQL/ServiceBroker/EndDialog')
         BEGIN
 
-            -- The workflow was completed and can be forwarded to the external activation listener
-            -- C# code that runs in a console app
-            DECLARE @dialog_handle	UNIQUEIDENTIFIER
-
-            SAVE TRANSACTION WorkflowStep
-
-            BEGIN TRY
-
-
-		        --IN THIS EXAMPLE WE ONLY WANT NEW RECORDS
-		        --IN REALITY WE WOULD HANDLE UPDATES IN THIS CALL TOO
-		        INSERT INTO @PayloadData
-		        SELECT Id,
-		               Content
-		        FROM Payload
-                --Use a where clause to send only the update with modified dates
-
-		        SET @PayloadData = (SELECT id,
-								           content
-							        FROM @PayloadData
-							        FOR XML PATH ('payload'), ROOT('payloads'));
-
-                BEGIN DIALOG CONVERSATION @dialog_handle 
-			    FROM SERVICE 
-				    [ServiceA_Out]
-			    TO SERVICE 
-				    N'ServiceC_In'
-			    ON CONTRACT 
-				    [SBMessageContract];
-
-		        SEND ON CONVERSATION @dialog_handle
-				        MESSAGE TYPE [ValidatedSenderMessageType](@PayloadData);
-
-                END CONVERSATION @Conversation_Handle
-            END TRY
-            BEGIN CATCH
-                SELECT @ErrorMessage = ERROR_MESSAGE();  
-                SELECT @ErrorNumber = ERROR_NUMBER();
-
-                ROLLBACK TRANSACTION WorkflowStep;
-
-                END CONVERSATION @Conversation_Handle WITH ERROR = @ErrorNumber DESCRIPTION = @ErrorMessage
-
-                RETURN
-            END CATCH
+            END CONVERSATION @Conversation_Handle
         END
-
-        COMMIT WORK
-
     END TRY
     BEGIN CATCH
         SELECT @ErrorMessage = ERROR_MESSAGE();  
         SELECT @ErrorNumber = ERROR_NUMBER();
-                
-        END CONVERSATION @Conversation_Handle WITH ERROR = @ErrorNumber DESCRIPTION = @ErrorMessage
+
+        DECLARE @PayloadError XML(ErrorData)
+
+        SET @PayloadError = (SELECT id,
+							@ErrorNumber [errorId],
+                            @ErrorMessage [errorDescription]                            
+					FROM @PayloadData
+					FOR XML PATH ('error'), ROOT('errorDescription'));            
+
+
+        SEND ON CONVERSATION @Conversation_Handle
+            MESSAGE TYPE [ErrorReceiverMessageType](@PayloadError)
     END CATCH
 END

@@ -1,6 +1,8 @@
 ﻿CREATE XML SCHEMA COLLECTION [dbo].[ValidatedData]
 AS
-N'<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+N'<xs:schema attributeFormDefault="unqualified" 
+             elementFormDefault="qualified" 
+             xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:element name="id" type="xs:int"/>
   <xs:element name="content" type="xs:string"/>
   <xs:element name="payload">
@@ -18,4 +20,4 @@ N'<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" x
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-</xs:schema>'
+</xs:schema>';
