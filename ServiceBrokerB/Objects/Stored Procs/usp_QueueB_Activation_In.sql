@@ -10,7 +10,8 @@ BEGIN
             @MessageType NVARCHAR(MAX),
             @MessageSequenceNumber INT,
             @ErrorMessage NVARCHAR(4000),  
-            @ErrorNumber INT
+            @ErrorNumber INT,
+            @PayloadData Payload_TT
 
     BEGIN TRY    
         
@@ -24,20 +25,27 @@ BEGIN
         IF (@MessageType = 'ValidatedSenderMessageType')
         BEGIN
 
-            DECLARE @XmlData_Request XML =  CAST(@MessageBody AS XML)
+            DECLARE @XmlData_Request XML (ValidatedData) =  CAST(@MessageBody AS XML)
             DECLARE @XmlData_Response XML
 
+            INSERT INTO @PayloadData
+            SELECT 
+            request.data.value('id[1]', 'int') id,
+            request.data.value('content[1]','nvarchar(max)') content
+            FROM @XmlData_Request.nodes('/payloads/payload') request(data)
+
+
             UPDATE Payload 
-            SET CONTENT = P.Content + CHAR(10) + 'Received'
-            FROM Payload P
-            CROSS APPLY @XmlData_Request.nodes('.') T(D) 
+            SET CONTENT = D.Content + CHAR(10) + 'Received'
+            FROM Payload P 
+            JOIN @PayloadData D ON P.ID = D.ID
 
 
             --IN REALITY SOMETHING WOULD HAPPEN HERE 
             --THIS EXAMPLE WERE ARE ADDING A SMALL BIT OF CONTENT AND SENDING BACK
             SET @XmlData_Response = (SELECT id,
 					content
-			FROM @XmlData_Response
+			    FROM @PayloadData
 			FOR XML PATH ('payload'), ROOT('payloads'));
                                
             SEND ON CONVERSATION @Conversation_Handle
@@ -55,9 +63,17 @@ BEGIN
         SELECT @ErrorMessage = ERROR_MESSAGE();  
         SELECT @ErrorNumber = ERROR_NUMBER();
 
-        ROLLBACK TRANSACTION;
+        DECLARE @PayloadError XML(ErrorData)
 
-        END CONVERSATION @Conversation_Handle WITH ERROR = @ErrorNumber DESCRIPTION = @ErrorMessage
+        SET @PayloadError = (SELECT id,
+							@ErrorNumber [errorId],
+                            @ErrorMessage [errorDescription]                            
+					FROM @PayloadData
+					FOR XML PATH ('error'), ROOT('errorDescription'));            
+
+
+        SEND ON CONVERSATION @Conversation_Handle
+            MESSAGE TYPE [ErrorReceiverMessageType](@PayloadError)
     END CATCH
 
 END

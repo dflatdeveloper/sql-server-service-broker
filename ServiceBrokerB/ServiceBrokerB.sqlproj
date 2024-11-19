@@ -77,7 +77,6 @@
     <PreDeploy Include="Script.PreDeployment1.sql" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="Objects\Stored Procs\usp_QueueB_Activation_Out.sql" />
     <Build Include="Objects\Contracts\SBMessageContract.sql" />
     <Build Include="Objects\Message Types\Create Receiver.sql" />
     <Build Include="Objects\Message Types\Create Sender.sql" />
@@ -96,6 +95,9 @@
     <None Include="Objects\Routes\Inbound Route.sql" />
     <None Include="Objects\Routes\Outbound Route.sql" />
     <Build Include="Objects\Types\Payload_TT.sql" />
+    <Build Include="Objects\Schema Collection\ErrorData.sql" />
+    <Build Include="Objects\Types\ReceiverError_TT.sql" />
+    <Build Include="Objects\Stored Procs\usp_QueueB_Activation_Out.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Objects\Queues\QueueB_Out.sql" />

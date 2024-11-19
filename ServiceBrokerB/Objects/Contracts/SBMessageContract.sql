@@ -1,4 +1,6 @@
-﻿CREATE CONTRACT [SBMessageContract]
+﻿--CAN BE USED TO SEND PLAIN TEXT, JSON OR WHATEVER.  
+--IT DIRECTS THE RECIEVER IT HAS A PAYLOAD BUT NOTHING TO VALIDATE
+CREATE CONTRACT [SBMessageContract]
 (
 	[SenderMessageType] SENT BY INITIATOR,
 	[ReceiverMessageType] SENT BY TARGET
@@ -8,10 +10,23 @@ GO
 CREATE CONTRACT [ValidatedSBMessageContract]
 (
 	[ValidatedSenderMessageType] SENT BY INITIATOR,
-	[ValidatedReceiverMessageType] SENT BY TARGET
+	[ValidatedReceiverMessageType] SENT BY TARGET,
+	[ErrorReceiverMessageType] SENT BY TARGET
 )
 GO
 
+--CAN BE USED TO SEND NOOP SIGNALS
+--THIS CONTEXT HAS HAS NO PAYLOAD
+CREATE CONTRACT [EmptySBMessageContract]
+(
+	[EmptySenderMessageType] SENT BY INITIATOR,
+	[EmptyReceiverMessageType] SENT BY TARGET
+)
+GO
+
+--THIS MERELY AN EXAMPLE OF XML BUT NOT VALIDATED
+--USED TO MAKE SURE THE WIRE DIDN'T CORRUPT THE MESSAGE
+--IT ISN'T USED IN THE EXAMPLE PROJECT
 CREATE CONTRACT [WellFormedXMLSBMessageContract]
 (
 	[WellFormedXMLSenderMessageType] SENT BY INITIATOR,
@@ -19,9 +34,3 @@ CREATE CONTRACT [WellFormedXMLSBMessageContract]
 )
 GO
 
-CREATE CONTRACT [EmptySBMessageContract]
-(
-	[EmptySenderMessageType] SENT BY INITIATOR,
-	[EmptyReceiverMessageType] SENT BY TARGET
-)
-GO

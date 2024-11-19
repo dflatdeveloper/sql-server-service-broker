@@ -2,55 +2,69 @@
 
 SQL Server Service Broker Example Version:^1^ 
 
+Use of Service Broker is best when two systems do not share a common authentication source.  Certificates are use on messages with transport security (validates it came from an authorized source) and dialog security (the message's data is encrypted).
+
 ## SETUP Components
 
-### Certificate Repository
+### Certificate Repository for this example
 
 - [ ] Create Key Repository DB Script Path^2^
 - [ ] Create Certificates
 - [ ] Backup Certificates
-- [ ] Create BROKER Databases: A and C on Server A, B on Server B
+- [ ] Run publishing script for Service Broker A on System A then Service Broker B on Server B
 
 ### Service Broker Databases
-- A 
-- B 
-- C is created after A
+- A - Source system 
+- B - Receiving system
+- C - Use of External Activator (can kick off a C# console app)
 
-#### Master DB SCRIPTS
-- [ ] Create DB
-- [ ] Create Master Key
-- [ ] Create Certificates
-- [ ] Create Endpoint
+#### Initial Setup Run 1
+1. User DB Certificate password of local system certificate (dialog)
+1. Certificate path of certificates
+1. Generate Routes is False
+1. Local Service Name, each service with have a unique name - this example has one for send and receive for one use case.  Many use cases can exist
+1. Master DB Certificate Password of local system certificate (transport)
+1. Remote Broker ID - empty string
+1. Remote Service Address - empty string
+1. Remote Service Name, each named for the receiving end of the service
+1. Remote Service Broker Database name
 
-#### Broker DB Scripts
-- [ ] Create Master Key
-- [ ] Create Certificates
-
-#### Object DDL for each Broker DB
-- [ ] Schema Collection Validation
-- [ ] Message Types 
-- [ ] Contracts
-- [ ] Queue Activation Stored Procedure
-- [ ] Queues
-- [ ] Services
-- [ ] Remote Service Binding
-- [ ] Route
+#### Initial Setup Run 2
+1. User DB Certificate password of local system certificate (dialog)
+1. Certificate path of certificates
+1. Generate Routes is True
+1. Local Service Name, each service with have a unique name - this example has one for send and receive for one use case.  Many use cases can exist
+1. Master DB Certificate Password of local system certificate (transport)
+1. Remote Broker ID - Guid of remote system [ DB Properties -> Options -> Broker ID]
+1. Remote Service Address - FQDN of Remote system
+1. Remote Service Name, each named for the receiving end of the service
+1. Remote Service Broker Database name
 
 ## Sending Data
 > [!NOTE]
 > This is the payload sample for the validating message types for this example.
 ```
-
- <payload name="11-11-11">
-    <set id="11">
-        <meta auth="11"><ss>ss</ss></meta>
-        <body>asd</body>
-    </set>
-    <note id="12">
-        <reference_old id="123">mm</reference_old>
-    </note>
-</payload>
+ <payloads>
+   <payload>
+	 <id>1</id>
+	 <content>some content</content>
+   </payload>
+   ...
+ </payloads>
 ```
+> [!NOTE]
+> This is the error sample for the application errors messages for this example.
+```
+<errors>
+   <error>
+	 <id>1</id>
+	 <errorId>2900</errorId>
+	 <errorDescription>Error Message</errorDescription>
+   </error>
+   ...
+ </errors>
+```
+
 
 - Table-valued parameter [spec](https://learn.microsoft.com/en-us/dotnet/framework/data/adonet/sql/table-valued-parameters) from C# 
 - Passing a table-valued to a stored procedure backed by service broker
