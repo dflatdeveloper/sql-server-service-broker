@@ -1,6 +1,5 @@
 ﻿CREATE TYPE [dbo].[Payload_TT] AS TABLE
 (
 	Id INT,
-	Content NVARCHAR(MAX),
-	RecieverAcknowledged BIT
+	Content NVARCHAR(MAX)
 )

@@ -135,7 +135,7 @@
       <Value>$(SqlCmdVar__8)</Value>
     </SqlCmdVariable>
     <SqlCmdVariable Include="REMOTE_SERVICE_ADDRESS">
-      <DefaultValue>TCP://SB-A.home.local:4022</DefaultValue>
+      <DefaultValue>TCP://sb-a.crayonsforchow.net:4022</DefaultValue>
       <Value>$(SqlCmdVar__7)</Value>
     </SqlCmdVariable>
     <SqlCmdVariable Include="REMOTE_SERVICE_NAME_">
