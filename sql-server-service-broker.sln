@@ -7,7 +7,7 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "ServiceBrokerB", "ServiceBr
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A49EFCB8-62A4-4493-8A06-5442F379DD85}"
 	ProjectSection(SolutionItems) = preProject
-		DockerFile = DockerFile
+		Integration Notes.txt = Integration Notes.txt
 		README.md = README.md
 	EndProjectSection
 EndProject
@@ -33,6 +33,21 @@ EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "ServiceBrokerA", "ServiceBrokerA\ServiceBrokerA.sqlproj", "{21C4DEB6-6B6C-4696-B8D1-D0AA3ED36F38}"
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "ServiceBrokerC", "ServiceBrokerC\ServiceBrokerC.sqlproj", "{824894F0-04FC-47B8-AFC8-CB96CEE8B732}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docker Build Paths", "Docker Build Paths", "{ED34CC52-3D3A-417B-8631-B0D6A9C553A2}"
+	ProjectSection(SolutionItems) = preProject
+		Docker Build Path\Create-Service-Broker-Docker-Images.ps1 = Docker Build Path\Create-Service-Broker-Docker-Images.ps1
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Phase1", "Phase1", "{D9D5AFB0-0DE0-4E1D-A445-4913EC1054C2}"
+	ProjectSection(SolutionItems) = preProject
+		Docker Build Path\Phase 1\Dockerfile = Docker Build Path\Phase 1\Dockerfile
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Phase2", "Phase2", "{09A3CEB6-B7CD-4E4D-A7C0-37DD5CF99979}"
+	ProjectSection(SolutionItems) = preProject
+		Docker Build Path\Phase 2\Dockerfile = Docker Build Path\Phase 2\Dockerfile
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -65,6 +80,9 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{27F0DE3C-699D-4C81-BCF5-BCE7D132DFBC} = {A49EFCB8-62A4-4493-8A06-5442F379DD85}
 		{62B7CA98-5DB6-45B3-9FCC-13DDD3A43274} = {A49EFCB8-62A4-4493-8A06-5442F379DD85}
+		{ED34CC52-3D3A-417B-8631-B0D6A9C553A2} = {A49EFCB8-62A4-4493-8A06-5442F379DD85}
+		{D9D5AFB0-0DE0-4E1D-A445-4913EC1054C2} = {ED34CC52-3D3A-417B-8631-B0D6A9C553A2}
+		{09A3CEB6-B7CD-4E4D-A7C0-37DD5CF99979} = {ED34CC52-3D3A-417B-8631-B0D6A9C553A2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A3E07C08-9DB3-4BD2-AD97-CB1DB94855F2}

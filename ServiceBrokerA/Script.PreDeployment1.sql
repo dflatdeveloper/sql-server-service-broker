@@ -13,12 +13,22 @@ USE [$(DatabaseName)]
 :r ".\user\security\CREATE Master Key.sql"
 :r ".\user\security\Create Local Certificate.sql"
 
+
+IF EXISTS(SELECT 0 FROM SYS.SYSUSERS WHERE NAME = N'[User_$(SERVICE_BROKER_REMOTE)]')
+BEGIN
+	GOTO REMOTE_USER_COMPLETE
+END
+
+:r ".\user\security\Create Remote User.sql"    
+
+REMOTE_USER_COMPLETE:
+
+
 IF EXISTS(SELECT 0 FROM SYS.CERTIFICATES WHERE NAME = N'DIALOG_CERT_$(SERVICE_BROKER_REMOTE)')
 BEGIN
 	GOTO REMOTE_SERVICE_COMPLETE
 END
 
-:r ".\user\security\Create Remote User.sql"    
 :r ".\user\security\Create Remote Certificate.sql"   
 
 REMOTE_SERVICE_COMPLETE:

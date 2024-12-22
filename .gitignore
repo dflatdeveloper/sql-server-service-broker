@@ -398,3 +398,4 @@ FodyWeavers.xsd
 *.sln.iml
 /Certificates
 /database_volume
+/external-resources
