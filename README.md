@@ -1,22 +1,46 @@
-# sql-server-service-broker
+# Setting up SQL Server Service Broker (SSB)
 
-SQL Server Service Broker Example Version:^1^ 
+SQL Server Version:^1^ 
 
-Use of Service Broker is best when two systems do not share a common authentication source.  Certificates are use on messages with transport security (validates it came from an authorized source) and dialog security (the message's data is encrypted).
+Use of Service Broker is best when two systems do not share a common authentication source like NTLM.  Certificates are used to deliver messages with transport security (validates it came from an authorized source) and dialog security (the message's data encryption).
 
-## SETUP Components
+## Required Components Setup
 
-### Certificate Repository for this example
+### Import Certificate with Private Key to Repository SQL Server
 
-- [ ] Create Key Repository DB Script Path^2^
-- [ ] Create Certificates
+- [ ] Import Certificate: Local Computer -> Personal (My)
+
+![Image of available Private Certificates](./images/Import-Certificate.png)
+
+- [ ] Context Menu on Certificate -> All Tasks -> Manage Private Keys
+
+![Image of selected Private Certificate's Users](./images/Certificate-Permissions.png)
+
+- [ ] Add Read permission for SQL Service Principle (e.g. NT SERVICE\MSSQLSERVER) 
+
+> [!IMPORTANT]
+> Remember to Restart SQL Server Service
+
+### Certificate Repository
+> [!NOTE]
+> This for this example, as long the cert follows the guidance by Microsoft it should work.
+> Create them in a seperate DB and export them (Backup Certificate ....), including the private key (pvk)
+
+#### DB generated Certificates
+- [ ] Create Key Repository from DB Script Path^2^
+- [ ] Create Certificates in Repository DB
 - [ ] Backup Certificates
-- [ ] Run publishing script for Service Broker A on System A then Service Broker B on Server B
+
+#### CA generated Certificates 
+- Use PvkConverter to create CER and PVK files from CA generated PFX
+
+- [ ] Convert PFX to CER and PVK files
+- [ ] Import with CREATE CERTIFICATE...
+
 
 ### Service Broker Databases
 - A - Source system 
 - B - Receiving system
-- C - Use of External Activator (can kick off a C# console app)
 
 #### Initial Setup Run 1
 1. User DB Certificate password of local system certificate (dialog)
@@ -65,15 +89,14 @@ Use of Service Broker is best when two systems do not share a common authenticat
  </errors>
 ```
 
-
 - Table-valued parameter [spec](https://learn.microsoft.com/en-us/dotnet/framework/data/adonet/sql/table-valued-parameters) from C# 
 - Passing a table-valued to a stored procedure backed by service broker
 - Kicks off a Send Method to send to a Remote Broker (or a different one on local)  
 - The Send Method Arguments can have an xml payload validated by a schema, extracted strings (either xml, json, encoded binaries from VARBINARY), or data that the BROKER DB leave as unvalidated
 
 ### Security Model
--	I used Certificates to allow to disparate systems function together
-	- Bonus here is the two systems do not need the same backbone authentication (Active Directory)
+-	I used Certificates to allow two disparate systems to function together
+	- Bonus here is the two systems do not need the same backbone authentication (Active Directory, LDAP, etc.)
 
 - Service Broker Routes operate with FQDNs only.  Add Server A and Server B to an internal DNS
 
