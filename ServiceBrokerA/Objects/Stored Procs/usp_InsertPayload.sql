@@ -8,35 +8,38 @@ BEGIN
 
 	BEGIN TRAN
 
-		DECLARE @PayloadData XML
+	DECLARE @PayloadData XML
 
-		DECLARE @NewPayload [dbo].[Payload_TT]
+	DECLARE @NewPayload [dbo].[Payload_TT]
 
-
-		--IN THIS EXAMPLE WE ONLY WANT NEW RECORDS
-		--IN REALITY WE WOULD HANDLE UPDATES IN THIS CALL TOO
-		INSERT INTO @NewPayload
-		SELECT Id,
-		       Content
-		FROM @payloads
-		WHERE ID = 0
+	INSERT INTO @NewPayload
+	SELECT Id,
+		    Content
+	FROM @payloads
 
 
-		SET @PayloadData = (SELECT id,
-								   content
-							FROM @NewPayload
-							FOR XML PATH ('payload'), ROOT('payloads'));
+        
+    IF EXISTS(SELECT 0 FROM @NewPayload)
+    BEGIN
 
-		BEGIN DIALOG CONVERSATION @dialog_handle 
-			FROM SERVICE 
-				[ServiceA_Out]
-			TO SERVICE 
-				N'ServiceB_In'
-			ON CONTRACT 
-				[ValidatedSBMessageContract];
+        SET @PayloadData = (SELECT id,
+							        content
+					        FROM @NewPayload
+					        FOR XML PATH ('payload'), ROOT('payloads'));
+        
+	    BEGIN DIALOG CONVERSATION @dialog_handle 
+		    FROM SERVICE 
+			    [ServiceA_Out]
+		    TO SERVICE 
+			    N'ServiceB_In'
+		    ON CONTRACT 
+			    [ValidatedSBMessageContract];
 
-		 SEND ON CONVERSATION @dialog_handle
-				MESSAGE TYPE [ValidatedSenderMessageType](@PayloadData);
+		SEND ON CONVERSATION @dialog_handle
+			MESSAGE TYPE [ValidatedSenderMessageType](@PayloadData);
+    END
+    ELSE
+        PRINT 'No Records'
 
 	COMMIT
 END

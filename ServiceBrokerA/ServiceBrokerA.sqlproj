@@ -87,6 +87,8 @@
     <None Include="Objects\Routes\Inbound Route.sql" />
     <None Include="Objects\Routes\Outbound Route.sql" />
     <None Include="Create-Image-Build-Certs.txt" />
+    <None Include="ServiceBrokerA as FirstRun.publish.xml" />
+    <None Include="ServiceBrokerA with RouteGen.publish.xml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="master\Create Endpoint.sql" />
@@ -122,11 +124,11 @@
   </ItemGroup>
   <ItemGroup>
     <SqlCmdVariable Include="CERTIFICATE_PASSWORD">
-      <DefaultValue>Password123!@#</DefaultValue>
+      <DefaultValue>&lt;password&gt;</DefaultValue>
       <Value>$(SqlCmdVar__3)</Value>
     </SqlCmdVariable>
     <SqlCmdVariable Include="CERTIFICATE_PATH">
-      <DefaultValue>C:\Users\dbms-\source\repos\sql-server-service-broker\Certificates\</DefaultValue>
+      <DefaultValue>/usr/path/to/certificate/folder</DefaultValue>
       <Value>$(SqlCmdVar__1)</Value>
     </SqlCmdVariable>
     <SqlCmdVariable Include="GENERATE_ROUTES">
@@ -134,28 +136,36 @@
       <Value>$(SqlCmdVar__9)</Value>
     </SqlCmdVariable>
     <SqlCmdVariable Include="LOCAL_SERVICE_NAME">
-      <DefaultValue>ServiceA</DefaultValue>
+      <DefaultValue>ForExampleOnlyA</DefaultValue>
       <Value>$(SqlCmdVar__4)</Value>
     </SqlCmdVariable>
     <SqlCmdVariable Include="MASTER_KEY_PASSWORD">
-      <DefaultValue>Password123!@#</DefaultValue>
+      <DefaultValue>&lt;password&gt;</DefaultValue>
       <Value>$(SqlCmdVar__5)</Value>
     </SqlCmdVariable>
     <SqlCmdVariable Include="REMOTE_BROKER_ID">
-      <DefaultValue>2a0ccde4-9f72-4f51-997d-13df134cb55e</DefaultValue>
+      <DefaultValue>00000000-0000-0000-0000-000000000000</DefaultValue>
       <Value>$(SqlCmdVar__8)</Value>
     </SqlCmdVariable>
     <SqlCmdVariable Include="REMOTE_SERVICE_ADDRESS">
-      <DefaultValue>TCP://sb-b.crayonsforchow.net:4022</DefaultValue>
+      <DefaultValue>tcp://remote.server.fqdn:4022</DefaultValue>
       <Value>$(SqlCmdVar__7)</Value>
     </SqlCmdVariable>
     <SqlCmdVariable Include="REMOTE_SERVICE_NAME_">
-      <DefaultValue>ServiceB</DefaultValue>
+      <DefaultValue>ForExampleOnlyB</DefaultValue>
       <Value>$(SqlCmdVar__6)</Value>
     </SqlCmdVariable>
-    <SqlCmdVariable Include="SERVICE_BROKER_REMOTE">
-      <DefaultValue>SERVICEBROKERB</DefaultValue>
+    <SqlCmdVariable Include="SERVICE_BROKER_REMOTE_DB_NAME">
+      <DefaultValue>DatabaseName</DefaultValue>
       <Value>$(SqlCmdVar__2)</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="TRANSPORT_CERT_LOCAL_MACHINE_NAME">
+      <DefaultValue>local.server.fqdn</DefaultValue>
+      <Value>$(SqlCmdVar__10)</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="TRANSPORT_CERT_REMOTE_MACHINE_NAME">
+      <DefaultValue>remote.server.fqdn</DefaultValue>
+      <Value>$(SqlCmdVar__11)</Value>
     </SqlCmdVariable>
   </ItemGroup>
 </Project>

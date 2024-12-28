@@ -101,6 +101,38 @@ Use of Service Broker is best when two systems do not share a common authenticat
 - Service Broker Routes operate with FQDNs only.  Add Server A and Server B to an internal DNS
 
 
+### Things to remember
+
+> [!IMPORTANT]
+> These must be working to have messages to pass back and forth
+> - Security 
+>	- Certificates
+>    	- Transport 
+>			Certificates live in master DB
+>        - Dialog
+>			Certificates live in Service Broker enabled DB
+>	- Master Database Master Key
+>	- User Database Master Key
+>	- Encryption By Master Key 
+>   - MSDB changes
+> - Contracts
+>   - XML Schema Collections
+>     - WHEN TO USE
+>   - MESSAGE TYPES
+>   - FIRE AND FORGET MESSAGING
+	- ERROR HANDLING
+    	- USING Types
+			- http://schemas.microsoft.com/SQL/ServiceBroker/Error
+			- http://schemas.microsoft.com/SQL/ServiceBroker/EndDialog
+> - Conversations
+	- Multicast
+	- Shortest Recipient
+	- Routes
+	- 
+
+
+
+
 ### External Activator Setup
 > [!IMPORTANT]
 This needs to be setup only if only if running the external activator example

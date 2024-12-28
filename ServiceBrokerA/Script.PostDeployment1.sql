@@ -8,6 +8,8 @@ END
 :r ".\Objects\Routes\Inbound Route.sql"
 :r ".\Objects\Routes\Outbound Route.sql"
 
+PRINT 'ROUTE GENERATION CREATED'
+
 ROUTE_CREATION_COMPLETE:
 
 :r ".\Objects\Remote Service Binding\Inbound Binding.sql"
