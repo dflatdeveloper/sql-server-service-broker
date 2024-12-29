@@ -155,9 +155,4 @@
       <Value>$(SqlCmdVar__11)</Value>
     </SqlCmdVariable>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="ServiceBrokerB.publish.xml" />
-    <None Include="ServiceBrokerB with RouteGen.publish.xml" />
-    <None Include="ServiceBrokerB as FirstRun.publish.xml" />
-  </ItemGroup>
 </Project>

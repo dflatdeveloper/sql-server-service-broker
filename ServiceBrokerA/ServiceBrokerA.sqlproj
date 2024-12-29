@@ -87,8 +87,6 @@
     <None Include="Objects\Routes\Inbound Route.sql" />
     <None Include="Objects\Routes\Outbound Route.sql" />
     <None Include="Create-Image-Build-Certs.txt" />
-    <None Include="ServiceBrokerA as FirstRun.publish.xml" />
-    <None Include="ServiceBrokerA with RouteGen.publish.xml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="master\Create Endpoint.sql" />
