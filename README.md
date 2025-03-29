@@ -1,55 +1,92 @@
-# sql-server-service-broker
+# Setting up SQL Server Service Broker (SSB)
 
-SQL Server Service Broker Example Version:^1^ 
+SQL Server Version:^1^ 
 
-## SETUP Components
+Use of Service Broker is best when two systems do not share a common authentication source like NTLM.  Certificates are used to deliver messages with transport security (validates it came from an authorized source) and dialog security (the message's data encryption).
+
+## Required Components Setup
+
+### Import Certificate with Private Key to Repository SQL Server
+
+- [ ] Import Certificate: Local Computer -> Personal (My)
+
+![Image of available Private Certificates](./images/Import-Certificate.png)
+
+- [ ] Context Menu on Certificate -> All Tasks -> Manage Private Keys
+
+![Image of selected Private Certificate's Users](./images/Certificate-Permissions.png)
+
+- [ ] Add Read permission for SQL Service Principle (e.g. NT SERVICE\MSSQLSERVER) 
+
+> [!IMPORTANT]
+> Remember to Restart SQL Server Service
 
 ### Certificate Repository
+> [!NOTE]
+> This for this example, as long the cert follows the guidance by Microsoft it should work.
+> Create them in a seperate DB and export them (Backup Certificate ....), including the private key (pvk)
 
-- [ ] Create Key Repository DB Script Path^2^
-- [ ] Create Certificates
+#### DB generated Certificates
+- [ ] Create Key Repository from DB Script Path^2^
+- [ ] Create Certificates in Repository DB
 - [ ] Backup Certificates
-- [ ] Create BROKER Databases: A and C on Server A, B on Server B
+
+#### CA generated Certificates 
+- Use PvkConverter to create CER and PVK files from CA generated PFX
+
+- [ ] Convert PFX to CER and PVK files
+- [ ] Import with CREATE CERTIFICATE...
+
 
 ### Service Broker Databases
-- A 
-- B 
-- C is created after A
+- A - Source system 
+- B - Receiving system
 
-#### Master DB SCRIPTS
-- [ ] Create DB
-- [ ] Create Master Key
-- [ ] Create Certificates
-- [ ] Create Endpoint
+#### Initial Setup Run 1
+1. User DB Certificate password of local system certificate (dialog)
+1. Certificate path of certificates
+1. Generate Routes is False
+1. Local Service Name, each service with have a unique name - this example has one for send and receive for one use case.  Many use cases can exist
+1. Master DB Certificate Password of local system certificate (transport)
+1. Remote Broker ID - empty string
+1. Remote Service Address - empty string
+1. Remote Service Name, each named for the receiving end of the service
+1. Remote Service Broker Database name
 
-#### Broker DB Scripts
-- [ ] Create Master Key
-- [ ] Create Certificates
-
-#### Object DDL for each Broker DB
-- [ ] Schema Collection Validation
-- [ ] Message Types 
-- [ ] Contracts
-- [ ] Queue Activation Stored Procedure
-- [ ] Queues
-- [ ] Services
-- [ ] Remote Service Binding
-- [ ] Route
+#### Initial Setup Run 2
+1. User DB Certificate password of local system certificate (dialog)
+1. Certificate path of certificates
+1. Generate Routes is True
+1. Local Service Name, each service with have a unique name - this example has one for send and receive for one use case.  Many use cases can exist
+1. Master DB Certificate Password of local system certificate (transport)
+1. Remote Broker ID - Guid of remote system [ DB Properties -> Options -> Broker ID]
+1. Remote Service Address - FQDN of Remote system
+1. Remote Service Name, each named for the receiving end of the service
+1. Remote Service Broker Database name
 
 ## Sending Data
 > [!NOTE]
 > This is the payload sample for the validating message types for this example.
 ```
-
- <payload name="11-11-11">
-    <set id="11">
-        <meta auth="11"><ss>ss</ss></meta>
-        <body>asd</body>
-    </set>
-    <note id="12">
-        <reference_old id="123">mm</reference_old>
-    </note>
-</payload>
+ <payloads>
+   <payload>
+	 <id>1</id>
+	 <content>some content</content>
+   </payload>
+   ...
+ </payloads>
+```
+> [!NOTE]
+> This is the error sample for the application errors messages for this example.
+```
+<errors>
+   <error>
+	 <id>1</id>
+	 <errorId>2900</errorId>
+	 <errorDescription>Error Message</errorDescription>
+   </error>
+   ...
+ </errors>
 ```
 
 - Table-valued parameter [spec](https://learn.microsoft.com/en-us/dotnet/framework/data/adonet/sql/table-valued-parameters) from C# 
@@ -58,10 +95,42 @@ SQL Server Service Broker Example Version:^1^
 - The Send Method Arguments can have an xml payload validated by a schema, extracted strings (either xml, json, encoded binaries from VARBINARY), or data that the BROKER DB leave as unvalidated
 
 ### Security Model
--	I used Certificates to allow to disparate systems function together
-	- Bonus here is the two systems do not need the same backbone authentication (Active Directory)
+-	I used Certificates to allow two disparate systems to function together
+	- Bonus here is the two systems do not need the same backbone authentication (Active Directory, LDAP, etc.)
 
 - Service Broker Routes operate with FQDNs only.  Add Server A and Server B to an internal DNS
+
+
+### Things to remember
+
+> [!IMPORTANT]
+> These must be working to have messages to pass back and forth
+> - Security 
+>	- Certificates
+>    	- Transport 
+>			Certificates live in master DB
+>        - Dialog
+>			Certificates live in Service Broker enabled DB
+>	- Master Database Master Key
+>	- User Database Master Key
+>	- Encryption By Master Key 
+>   - MSDB changes
+> - Contracts
+>   - XML Schema Collections
+>     - WHEN TO USE
+>   - MESSAGE TYPES
+>   - FIRE AND FORGET MESSAGING
+	- ERROR HANDLING
+    	- USING Types
+			- http://schemas.microsoft.com/SQL/ServiceBroker/Error
+			- http://schemas.microsoft.com/SQL/ServiceBroker/EndDialog
+> - Conversations
+	- Multicast
+	- Shortest Recipient
+	- Routes
+	- 
+
+
 
 
 ### External Activator Setup

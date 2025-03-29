@@ -1,16 +1,15 @@
-﻿/*
-Post-Deployment Script Template							
---------------------------------------------------------------------------------------
- This file contains SQL statements that will be appended to the build script.		
- Use SQLCMD syntax to include a file in the post-deployment script.			
- Example:      :r .\myfile.sql								
- Use SQLCMD syntax to reference a variable in the post-deployment script.		
- Example:      :setvar TableName MyTable							
-               SELECT * FROM [$(TableName)]					
---------------------------------------------------------------------------------------
-*/
+﻿IF CAST('$(GENERATE_ROUTES)' AS BIT) = 0
+BEGIN
+	PRINT 'SKIPPING ROUTE GENERATION'
 
---:r ".\Objects\Routes\RouteA.sql"
---:r ".\Objects\Routes\RouteC.sql"
---:r ".\Objects\Remote Service Binding\ServiceB_In.sql"
---:r ".\Objects\Remote Service Binding\ServiceB_Out.sql"
+	GOTO ROUTE_CREATION_COMPLETE
+END
+
+:r ".\Objects\Routes\Inbound Route.sql"
+:r ".\Objects\Routes\Outbound Route.sql"
+
+ROUTE_CREATION_COMPLETE:
+
+:r ".\Objects\Remote Service Binding\Inbound Binding.sql"
+:r ".\Objects\Remote Service Binding\Outbound Binding.sql"
+:r ".\user\security\Grant Connect To Service.sql"
